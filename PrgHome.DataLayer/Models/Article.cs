@@ -13,8 +13,8 @@ namespace PrgHome.DataLayer.Models
         public string Content { get; set; }
         public string Image { get; set; }
         public int View { get; set; }
-        public int TimeToRead { get; set; }
-        public DateTime PublishDate { get; set; }
+        public int? TimeToRead { get; set; }
+        public DateTime? PublishDate { get; set; }
         public bool IsPublish { get; set; }
         public string Tags { get; set; }
         #endregion
@@ -22,6 +22,7 @@ namespace PrgHome.DataLayer.Models
         #region Navigation Properties
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public List<Comment> Comments { get; set; }
         #endregion
     }
 }
