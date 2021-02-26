@@ -1,0 +1,110 @@
+﻿<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت - @ViewData["Title"]</title>
+    <!--css refrences-->
+    <link href="/css/admin.css" rel="stylesheet">
+    <!--font-awesome refrence-->
+    <link rel="stylesheet" href="/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/css/fontawesome.min.css" />
+    <!--animate.css refrence-->
+    <link rel="stylesheet" href="/css/animate.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="navbar">
+            <section class="navbar-right">
+                <a class="active" href="#">داشبورد</a>
+                <a href="#">کاربران</a>
+            </section>
+            <section class="navbar-left">
+                <section class="profile">
+                    <span>
+                        عرفان لشگری
+                        <i class=" fas fa-caret-down"></i>
+                    </span>
+                    <a href="#">
+                        <img src="./images/avatar.svg" width="30" alt="">
+                    </a>
+                </section>
+            </section>
+
+        </nav>
+        <div class="sidebar animate__animated animate__fadeInRight ">
+            <header>
+                <h3>خانه برنامه نویسان</h3>
+                <img src="./images/logo.png" alt="">
+            </header>
+            <ul>
+                <li>
+                    <a href="#">
+                        داشبورد <i class="fas fa-home"></i>
+                    </a>
+                </li>
+                <h3 class="sidebar-title">مدیریت محتوا</h3>
+                <li>
+                    <a href="#">
+                        داشبورد <i class="fas fa-podcast"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        مقالات <i class="fas fa-camera"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        دسته بندی ها <i class="fas  fa-home"></i>
+                    </a>
+                </li>
+                <h3 class="sidebar-title">مدیریت محتوا</h3>
+                <li>
+                    <a href="#">
+                        داشبورد <i class="fas fa-podcast"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        مقالات <i class="fas fa-camera"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        دسته بندی ها <i class="fas  fa-home"></i>
+                    </a>
+                </li>
+                <h3 class="sidebar-title">
+                    کاربری
+                    <i class="fas  fa-user"></i>
+                </h3>
+
+                <li>
+                    <a href="#">
+                        تنظیمات <i class="fas fa-cog"></i>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="danger" href="#">
+                        خروج <i class="fas fa-power-off"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <main>
+            @RenderBody()
+        </main>
+        <footer>
+            <p>تمامی حقوق این سایت متعلق به عرفان لشگری است</p>
+            <p>@(DateTime.Now.Year+" @")</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
