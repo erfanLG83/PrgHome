@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CategoryViewModel>
+@{
+    ViewData["Title"] = "دسته بندی ها";
+}
+
+
+<section class="margin-20">
+    <h2 class="table-title animate__animated animate__fadeIn animate__delay-1s">دسته بندی ها</h2>
+    <a asp-action="Create" class="create-link">
+        افزودن دسته بندی
+        <i class="fas fa-upload"></i>
+    </a>
+    <section class="table-container">
+
+        <table class="table animate__animated animate__zoomIn animate__delay-1s ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان دسته</th>
+                    <th>تعداد مقالات</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Row</td>
+                        <td>@item.Title</td>
+                        <td>@item.ArticleCount</td>
+                        <td class="d-flex">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">جزئیات</a>
+                            <a class="btn btn-warning btn-sm margin-rl-10" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+    <partial name="_PaginationPartial" model="ViewBag.PaginationModel" />
+</section>
+
+@section Scripts{
+}
+

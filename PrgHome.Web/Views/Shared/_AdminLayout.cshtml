@@ -12,13 +12,18 @@
     <link rel="stylesheet" href="/css/fontawesome.min.css" />
     <!--animate.css refrence-->
     <link rel="stylesheet" href="/css/animate.min.css">
+    @RenderSection("Styles",false)
 </head>
 
 <body>
 
     <div class="container">
+        <input id="toggle" type="checkbox" />
         <nav class="navbar">
             <section class="navbar-right">
+                <label class="navbar-toggle" for="toggle">
+                    <i class="fas fa-bars"></i>
+                </label>
                 <a class="active" href="#">داشبورد</a>
                 <a href="#">کاربران</a>
             </section>
@@ -26,19 +31,27 @@
                 <section class="profile">
                     <span>
                         عرفان لشگری
-                        <i class=" fas fa-caret-down"></i>
+                        <i id="profile-toggle" class=" fas fa-caret-down"></i>
                     </span>
                     <a href="#">
-                        <img src="./images/avatar.svg" width="30" alt="">
+                        <img src="~/images/avatar.svg" width="30" alt="">
                     </a>
+                </section>
+                <section class="animate__animated " id="profile-box">
+                    <a href="#">متن</a>
+                    <a href="#">متن</a>
+                    <a href="#">متن</a>
                 </section>
             </section>
 
         </nav>
         <div class="sidebar animate__animated animate__fadeInRight ">
+            <label class="sidebar-close" for="toggle">
+                <i class="fas fa-times"></i>
+            </label>
             <header>
                 <h3>خانه برنامه نویسان</h3>
-                <img src="./images/logo.png" alt="">
+                <img src="/images/logo.png" alt="">
             </header>
             <ul>
                 <li>
@@ -101,10 +114,11 @@
         </main>
         <footer>
             <p>تمامی حقوق این سایت متعلق به عرفان لشگری است</p>
-            <p>@(DateTime.Now.Year+" @")</p>
+            <p>@(DateTime.Now.Year + " @")</p>
         </footer>
     </div>
 
+    <script src="~/js/admin.js"></script>
+    @RenderSection("Scripts",false)
 </body>
-
 </html>

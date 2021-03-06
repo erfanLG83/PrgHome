@@ -1,0 +1,12 @@
+﻿@model CategoryViewModel
+@{
+    ViewData["Title"] = "Delete";
+}
+<h2 class="text-dark">از حذف دسته بندی @Model.Title با تعداد @Model.ArticleCount مقاله مطمئن هستید ؟</h2>
+<section class="form-container">
+    <form method="post" asp-action="Delete">
+        <button type="submit" class="btn btn-danger">
+            تایید
+        </button>
+    </form>
+</section>

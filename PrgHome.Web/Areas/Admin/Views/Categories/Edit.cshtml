@@ -1,0 +1,20 @@
+﻿@model CategoryDto
+@{
+    ViewData["Title"] = "ویرایش دسته بندی";
+}
+<h2 class="text-dark">افزودن دسته بندی</h2>
+<section class="form-container">
+    <form method="post" asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="All"></div>
+        <section class="form-group">
+            <label asp-for="Title"></label>
+            <input type="text" asp-for="Title" class="form-group-control">
+            <span class="danger"></span>
+        </section>
+        <button type="submit" class="btn btn-submit">
+            تایید
+        </button>
+    </form>
+</section>
+

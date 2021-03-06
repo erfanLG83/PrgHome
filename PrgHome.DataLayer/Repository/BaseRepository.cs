@@ -143,6 +143,11 @@ namespace PrgHome.DataLayer.Repository
             return _entity.AsNoTracking().Count();
         }
 
+        public int GetCount(Expression<Func<TEntity, bool>> expression)
+        {
+            return _entity.AsNoTracking().Count(expression);
+        }
+
         public async Task<List<TEntity>> GetPaginateResultAsync(int CurrentPage, int take = 4)
         {
             int skip = (CurrentPage - 1) * take;

@@ -1,0 +1,29 @@
+﻿@model Pagination
+@{ 
+    int i = Model.SelectedIndex - 4;
+    int max = 9;
+    if (i<1)
+    {
+        i = 1;
+    }
+}
+    <ul class="@(Model.UlClasses) pagination">
+        @if (Model.SelectedIndex > 1)
+        {
+            <li>
+                <a href="@(Model.GetUrl(Model.SelectedIndex - 1))" class="prev fas fa-arrow-right"></a>
+            </li>
+        }
+        @for (int j= 0 ; j < max && i<=Model.PageCount; j++ , i++)
+        {
+            <li>
+                <a class="@(i==Model.SelectedIndex?"active":"")" href="@(Model.GetUrl(i))">@i</a>
+            </li>
+        }
+        @if (Model.SelectedIndex < Model.PageCount)
+        {
+            <li>
+                <a href="@(Model.GetUrl(Model.SelectedIndex+1))" class="next fas fa-arrow-left"></a>
+            </li>
+        }
+    </ul>

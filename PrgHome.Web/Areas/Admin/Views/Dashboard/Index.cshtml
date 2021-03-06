@@ -1,135 +1,93 @@
-﻿
+﻿@model DashboardViewModel
 @{
     ViewData["Title"] = "داشبورد";
 }
 
 
 <section class="margin-20">
-    <h2 class="table-title animate__animated animate__fadeIn animate__delay-1s">مقالات</h2>
-    <table class="table animate__animated animate__zoomIn animate__delay-1s ">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>عنوان دسته</th>
-                <th>تعداد مقالات</th>
-                <th>عملیات</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h2 class="table-title animate__animated animate__fadeIn animate__delay-1s">دسته بندی ها</h2>
+    <section class="table-container">
 
-            <tr>
-                <td>1</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-
-            <tr>
-                <td>2</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-        </tbody>
-    </table>
-    <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-1s" href="tel:+943543">بیشتر ...</a>
+        <table class="table animate__animated animate__zoomIn animate__delay-1s ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان دسته</th>
+                    <th>تعداد مقالات</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Categories)
+                {
+                    <tr>
+                        <td>12</td>
+                        <td>@item.Title</td>
+                        <td>@item.ArticleCount</td>
+                        <td class="d-flex">
+                            <a class="btn btn-primary btn-sm" href="#">جزئیات</a>
+                            <a class="btn btn-warning btn-sm margin-rl-10" href="#">ویرایش</a>
+                            <a class="btn btn-danger btn-sm" href="#">حذف</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+    <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-1s" asp-action="Index" asp-area="Admin" asp-controller="Categories">بیشتر ...</a>
 </section>
 <section class="margin-20">
-    <h2 class="table-title animate__animated animate__fadeIn animate__delay-2s">دسته بندی ها</h2>
-    <table class="table animate__animated animate__zoomIn animate__delay-2s ">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>عنوان دسته</th>
-                <th>تعداد مقالات</th>
-                <th>عملیات</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h2 class="table-title animate__animated animate__fadeIn animate__delay-2s">کاربران</h2>
+    <section class="table-container">
 
-            <tr>
-                <td>1</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-
-            <tr>
-                <td>2</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="table animate__animated animate__zoomIn animate__delay-2s ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان مقاله</th>
+                    <th>تصویر</th>
+                    <th>دسته بندی</th>
+                    <th>بازدیدها</th>
+                    <th>تاریخ انتشار</th>
+                    <th>منتشر شده؟</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Articles)
+                {
+                <tr>
+                    <td>12</td>
+                    <td>@item.Title</td>
+                    <td>
+                        @if (item.Image == null)
+                        {
+                            <img src="~/images/article.png" width="50" />
+                        }
+                        else
+                        {
+                            <img src="@item.Image" width="50" />
+                        }
+                    </td>
+                    <td>@item.CategoryTitle</td>
+                    <td>@item.View</td>
+                    <td>@(item.PublishDate.HasValue ? item.PublishDate.Value.ToLongDateString() : "---")</td>
+                    <td>
+                        <input type="checkbox" @(item.IsPublish ? "checked" : "") disabled />
+                    </td>
+                    <td class="d-flex">
+                        <a class="btn btn-primary btn-sm" href="#">جزئیات</a>
+                        <a class="btn btn-warning btn-sm margin-rl-10" href="#">ویرایش</a>
+                        <a class="btn btn-danger btn-sm" href="#">حذف</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </section>
 
     <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-2s" href="tel:+943543">بیشتر ...</a>
+
 </section>
-<section class="margin-20">
-    <h2 class="table-title animate__animated animate__fadeIn animate__delay-3s">کاربران</h2>
-    <table class="table animate__animated animate__zoomIn animate__delay-3s ">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>عنوان دسته</th>
-                <th>تعداد مقالات</th>
-                <th>عملیات</th>
-            </tr>
-        </thead>
-        <tbody>
 
-            <tr>
-                <td>1</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-
-            <tr>
-                <td>2</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>طراحی های خلاقانه با html css</td>
-                <td>10</td>
-                <td>...</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-3s" href="tel:+943543">بیشتر ...</a>
-</section>
 

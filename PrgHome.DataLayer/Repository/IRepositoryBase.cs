@@ -32,5 +32,7 @@ namespace PrgHome.DataLayer.Repository
         void DeleteRange(IEnumerable<TEntity> entities);
         Task<List<TEntity>> GetPaginateResultAsync(int CurrentPage,int take =4);
         int GetCount();
+        int GetCount(Expression<Func<TEntity,bool>> expression);
+
     }
 }
