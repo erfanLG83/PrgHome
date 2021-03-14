@@ -14,6 +14,8 @@ namespace PrgHome.DataLayer.Mapping
                 .HasKey(n => n.Id);
             builder.Property(n => n.Description)
                 .HasMaxLength(350);
+            builder.Property(n => n.CategoryId)
+                .IsRequired(false);
             builder.Property(n => n.Image)
                 .IsRequired(false);
             builder.Property(n => n.IsPublish)

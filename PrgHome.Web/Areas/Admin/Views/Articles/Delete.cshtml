@@ -1,0 +1,34 @@
+﻿@model ArticleDetailsViewModel
+@{
+    ViewData["Title"] = "حذف مقاله";
+}
+
+<h1 class="text-dark">حذف مقاله @Model.Title مطمئن هستید ؟</h1>
+<section class="margin-20">
+    <p>
+        <b>عنوان : </b>
+        @Model.Title
+    </p>
+    <p>
+        <b>توضیح خلاصه : </b>
+        @(String.IsNullOrEmpty(Model.Description) ? "وارد نشده" : Model.Description)
+    </p>
+    <p>
+        <b>بازدید ها : </b>
+        @Model.View
+    </p>
+    <p>
+        <b>انتشار یافته؟ : </b>
+        <input type="checkbox" class="margin-rl-10" @(Model.IsPublish?"checked":"") disabled />
+    </p>
+</section>
+<form asp-action="DeleteConfirm" method="post">
+    <input type="hidden" asp-for="Id" />
+
+        <a class="btn btn-primary" asp-action="Index">بازگشت</a>
+        <button class="btn btn-danger" type="submit">
+            حذف
+        </button>
+</form>
+
+

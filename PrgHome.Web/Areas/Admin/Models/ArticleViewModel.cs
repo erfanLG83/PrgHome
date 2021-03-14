@@ -8,6 +8,8 @@ namespace PrgHome.Web.Areas.Admin.Models
 {
     public class ArticleViewModel
     {
+        public int Row { get; set; }
+        public int Id { get; set; }
         public string CategoryTitle { get; set; }
         public string Title { get; set; }
         public string Image { get; set; }

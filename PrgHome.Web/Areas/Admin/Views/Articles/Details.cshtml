@@ -1,0 +1,77 @@
+﻿@model ArticleDetailsViewModel
+@{
+    ViewData["Title"] = "جزئیات";
+}
+
+<h1 class="text-dark">جزئیات مقاله @Model.Title</h1>
+<section class="margin-20">
+    <p>
+        <b>عنوان : </b>
+        @Model.Title
+    </p>
+    <p>
+        <b>عنوان دسته بندی: </b>
+        @if (String.IsNullOrEmpty(Model.CategoryTitle))
+        {
+            <span class="badge badge-warning">وارد نشده</span>
+        }
+        else
+        {
+            @Model.CategoryTitle
+        }
+    </p>
+    <p>
+        <b>توضیح خلاصه : </b>
+        @(String.IsNullOrEmpty(Model.Description) ? "وارد نشده" : Model.Description)
+    </p>
+    <p>
+        <b>بازدید ها : </b>
+        @Model.View
+    </p>
+    <p>
+        <b>برچسب ها : </b>
+        @if (Model.Tags == null)
+        {
+            <span class="badge badge-warning">
+                وارد نشده
+            </span>
+        }
+        else
+        {
+            @foreach (var item in Model.Tags)
+            {
+                <span class="badge badge-primary">@item</span>
+            }
+        }
+    </p>
+    <p>
+        <b>زمان مطالعه (دقیقه) : </b>
+        @(Model.TimeToRead.HasValue ? Model.TimeToRead.Value.ToString() : "وارد نشده")
+    </p>
+    <p>
+        <b>تاریخ انتشار :</b>
+        @(Model.PublishDate.HasValue ? Model.PublishDate.Value.ToLongDateString() : "---")
+    </p>
+    <p>
+        <b>انتشار یافته؟ : </b>
+        <input type="checkbox" class="margin-rl-10" @(Model.IsPublish?"checked":"") disabled />
+    </p>
+
+    @if (Model.Image == null)
+    {
+        <p>
+            <b>تصویر : </b>
+            <span class="badge badge-warning">وارد نشده</span>
+        </p>
+    }
+    else
+    {
+
+        <h1 class="text-dark">تصویر</h1>
+        <div class="d-flex">
+            <img class="img-contain margin-20" src="~/Files/@Model.Image" />
+        </div>
+    }
+</section>
+
+

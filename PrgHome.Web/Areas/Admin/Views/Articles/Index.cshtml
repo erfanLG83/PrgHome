@@ -1,0 +1,62 @@
+﻿@model List<ArticleViewModel>
+@{
+    ViewData["Title"] = "مقالات";
+}
+
+
+<section class="margin-20">
+    <h2 class="table-title animate__animated animate__fadeIn animate__delay-1s">مقالات</h2>
+    <a asp-action="Create" class="create-link">
+        افزودن مقاله
+        <i class="fas fa-upload"></i>
+    </a>
+    <section class="table-container">
+
+        <table class="table animate__animated animate__zoomIn animate__delay-1s ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان</th>
+                    <th>تصویر</th>
+                    <th>دسته بندی</th>
+                    <th>بازدیدها</th>
+                    <th>تاریخ انتشار</th>
+                    <th>منتشر شده؟</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Row</td>
+                        <td>@item.Title</td>
+                        <td>
+                            @if (item.Image == null)
+                            {
+                                <img src="~/images/article.png" width="50" />
+                            }
+                            else
+                            {
+                                <img src="~/Files/@item.Image" width="50" />
+                            }
+                        </td>
+                        <td>@item.CategoryTitle</td>
+                        <td>@item.View</td>
+                        <td>@(item.PublishDate.HasValue ? item.PublishDate.Value.ToLongDateString() : "---")</td>
+                        <td>
+                            <input type="checkbox" @(item.IsPublish ? "checked" : "") disabled />
+                        </td>
+                        <td class="d-flex">
+                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">جزئیات</a>
+                            <a class="btn btn-warning btn-sm margin-rl-10" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+    <partial name="_PaginationPartial" model="ViewBag.PaginationModel" />
+</section>
+

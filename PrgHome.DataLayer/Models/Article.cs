@@ -20,7 +20,7 @@ namespace PrgHome.DataLayer.Models
         #endregion
 
         #region Navigation Properties
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Comment> Comments { get; set; }
         #endregion

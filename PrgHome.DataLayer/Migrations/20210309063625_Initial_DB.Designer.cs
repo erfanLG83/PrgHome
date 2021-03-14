@@ -10,8 +10,8 @@ using PrgHome.DataLayer;
 namespace PrgHome.DataLayer.Migrations
 {
     [DbContext(typeof(PrgHomeContext))]
-    [Migration("20210223190134_Create_File_TB")]
-    partial class Create_File_TB
+    [Migration("20210309063625_Initial_DB")]
+    partial class Initial_DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,7 +224,7 @@ namespace PrgHome.DataLayer.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -401,9 +401,7 @@ namespace PrgHome.DataLayer.Migrations
                 {
                     b.HasOne("PrgHome.DataLayer.Models.Category", "Category")
                         .WithMany("Articles")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });

@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PrgHome.DataLayer;
 using PrgHome.DataLayer.UnitOfWork;
+using PrgHome.Web.Classes;
+using PrgHome.Web.Services;
 
 namespace PrgHome.Web
 {
@@ -32,6 +34,7 @@ namespace PrgHome.Web
                 options.UseSqlServer(@"Server=.;Database=PrgHomeDB;trusted_Connection=True");
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IFileWorker, FileWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

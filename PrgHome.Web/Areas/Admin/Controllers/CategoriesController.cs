@@ -23,7 +23,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int index = 1, int row = 5)
         {
             int count = 0;
-            var categories = Pagination.GetData<Category>(await _categoryRep.FindAllAsync(false),ref count,row,index);
+            var categories = Pagination.GetData<Category>(await _categoryRep.FindAllAsync(),ref count,row,index);
             int pageCount = count % row == 0 ? count / row : (count / row) + 1;
             ViewBag.PaginationModel = new Pagination(Url,pageCount,index,row,"Index","Categories","");
             int rowCounter = row * (index-1);
