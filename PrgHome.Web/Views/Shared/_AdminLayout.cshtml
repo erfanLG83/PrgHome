@@ -20,12 +20,12 @@
     <div class="container">
         <input id="toggle" type="checkbox" />
         <nav class="navbar">
+
+            <label class="navbar-toggle" for="toggle">
+                <i class="fas fa-bars"></i>
+            </label>
             <section class="navbar-right">
-                <label class="navbar-toggle" for="toggle">
-                    <i class="fas fa-bars"></i>
-                </label>
-                <a class="active" href="#">داشبورد</a>
-                <a href="#">کاربران</a>
+                @RenderSection("Navbar", true)
             </section>
             <section class="navbar-left">
                 <section class="profile">

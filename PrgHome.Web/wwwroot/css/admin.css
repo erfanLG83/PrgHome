@@ -286,8 +286,9 @@ a.create-link {
 
 .navbar-toggle {
     font-size: 30px;
-    margin: auto 10px auto 25px;
+    margin: auto 10px auto 0;
     color: white;
+    position:absolute;
     cursor: pointer;
     display: none;
 }
@@ -306,6 +307,7 @@ a.create-link {
 }
 
 .navbar-right {
+    overflow-x:auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -313,6 +315,7 @@ a.create-link {
 }
 
 .navbar-right>a {
+    white-space:nowrap;
     color: #bfc8de;
     text-decoration: none;
     padding: 10px 20px;
@@ -343,6 +346,7 @@ a.create-link {
 }
 
 .navbar-left .profile>span {
+    white-space:nowrap;
     font-size: 18px;
     padding: 0 20px;
     cursor: pointer;
@@ -524,7 +528,9 @@ footer>p {
     transition: all .5s ease-in-out;
     font-weight: 700;
 }
-
+.btn.btn-center{
+    display:flex;
+}
 .btn-primary {
     border: 1px solid #007bff;
     background-color: #007bff;
@@ -719,6 +725,9 @@ label {
     }
     .navbar-toggle {
         display: block;
+    }
+    .navbar-right{
+        margin-right:50px;
     }
     .sidebar>header>h3 {
         font-size: 15px;

@@ -3,6 +3,9 @@
     ViewData["Title"] = "داشبورد";
 }
 
+@section Navbar{ 
+    <a href="#" class="active">داشبورد</a>
+}
 
 <section class="margin-20">
     <h2 class="table-title animate__animated animate__fadeIn animate__delay-1s">دسته بندی ها</h2>
@@ -34,7 +37,7 @@
             </tbody>
         </table>
     </section>
-    <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-1s" asp-action="Index" asp-area="Admin" asp-controller="Categories">بیشتر ...</a>
+    <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-1s  btn-center" asp-action="Index" asp-area="Admin" asp-controller="Categories">بیشتر ...</a>
 </section>
 <section class="margin-20">
     <h2 class="table-title animate__animated animate__fadeIn animate__delay-2s">کاربران</h2>
@@ -66,7 +69,7 @@
                         }
                         else
                         {
-                            <img src="@item.Image" width="50" />
+                            <img src="~/Files/@item.Image" width="50" />
                         }
                     </td>
                     <td>@item.CategoryTitle</td>
@@ -86,7 +89,7 @@
         </table>
     </section>
 
-    <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-2s" href="tel:+943543">بیشتر ...</a>
+    <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-2s  btn-center" asp-action="Index" asp-controller="Articles">بیشتر ...</a>
 
 </section>
 

@@ -5,6 +5,13 @@
 @section Styles{
     <link href="https://cdn.jsdelivr.net/npm/tom-select@1.1/dist/css/tom-select.css" rel="stylesheet">
 }
+@section Navbar{
+    <a asp-action="Index">مقالات</a>
+    <a asp-action="Create">افزودن</a>
+    <a asp-action="Details" asp-route-id="@Model.Id">جزئیات</a>
+    <a href="#" class="active">ویرایش</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id">حذف</a>
+}
 <h2 class="text-dark">افزودن دسته بندی</h2>
 <section class="form-container">
     <form method="post" enctype="multipart/form-data" asp-action="Edit">
@@ -70,28 +77,28 @@
     <script src="~/js/no_backspace_delete.js"></script>
     <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script>
-    new TomSelect('#category-select');
-    new TomSelect('#disable-backspace',{
-	plugins: ['no_backspace_delete','remove_button',],
-	persist: false,
-	create: true,
-	controlInput: '#input-disable-control',
-	dropdownParent: '#disable-wrapper',
-    valueField: 'title',
-	labelField: 'title',
-	searchField: 'title',
-	options: [
-		{ title: 'برنامه نویسی'},
-		{ title: 'سی شارپ'},
-		{ title: 'پایتون'},
-		{ title: 'Php'},
-		{ title: 'CSharp'},
-		{ title: 'C#'},
-		{ title: 'Python'}
-	],
-    });
-    CKEDITOR.replace('contentInput', {
-       customConfig:'/js/Config.js'
-    });
+        new TomSelect('#category-select');
+        new TomSelect('#disable-backspace', {
+            plugins: ['no_backspace_delete', 'remove_button',],
+            persist: false,
+            create: true,
+            controlInput: '#input-disable-control',
+            dropdownParent: '#disable-wrapper',
+            valueField: 'title',
+            labelField: 'title',
+            searchField: 'title',
+            options: [
+                { title: 'برنامه نویسی' },
+                { title: 'سی شارپ' },
+                { title: 'پایتون' },
+                { title: 'Php' },
+                { title: 'CSharp' },
+                { title: 'C#' },
+                { title: 'Python' }
+            ],
+        });
+        CKEDITOR.replace('contentInput', {
+            customConfig: '/js/Config.js'
+        });
     </script>
 }

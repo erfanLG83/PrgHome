@@ -3,6 +3,13 @@
     ViewData["Title"] = "حذف مقاله";
 }
 
+@section Navbar{
+    <a asp-action="Index">مقالات</a>
+    <a asp-action="Create">افزودن</a>
+    <a asp-action="Details" asp-route-id="@Model.Id" >جزئیات</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" >ویرایش</a>
+    <a href="#" class="active">حذف</a>
+}
 <h1 class="text-dark">حذف مقاله @Model.Title مطمئن هستید ؟</h1>
 <section class="margin-20">
     <p>
@@ -19,16 +26,16 @@
     </p>
     <p>
         <b>انتشار یافته؟ : </b>
-        <input type="checkbox" class="margin-rl-10" @(Model.IsPublish?"checked":"") disabled />
+        <input type="checkbox" class="margin-rl-10" @(Model.IsPublish ? "checked" : "") disabled />
     </p>
 </section>
 <form asp-action="DeleteConfirm" method="post">
     <input type="hidden" asp-for="Id" />
 
-        <a class="btn btn-primary" asp-action="Index">بازگشت</a>
-        <button class="btn btn-danger" type="submit">
-            حذف
-        </button>
+    <a class="btn btn-primary" asp-action="Index">بازگشت</a>
+    <button class="btn btn-danger" type="submit">
+        حذف
+    </button>
 </form>
 
 

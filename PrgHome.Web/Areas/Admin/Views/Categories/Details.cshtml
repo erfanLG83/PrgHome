@@ -1,22 +1,29 @@
 ﻿@model CategoryViewModel
 @{
-    ViewData["Title"] = "جزئیات "+Model.Title;
+    ViewData["Title"] = "جزئیات " + Model.Title;
 }
 
-    <section class="margin-20">
-        <section class="table-container">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>عنوان</td>
-                        <td>تعداد مقالات</td>
-                    </tr>
-                    <tr>
-                        <td>@Model.Title</td>
-                        <td>@Model.ArticleCount</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+@section Navbar{
+    <a asp-action="Index">دسته بندی ها</a>
+    <a asp-action="Create">افزودن</a>
+    <a href="#" class="active">جزئیات</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">ویرایش</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id">حذف</a>
+}
+<section class="margin-20">
+    <section class="table-container">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>عنوان</td>
+                    <td>تعداد مقالات</td>
+                </tr>
+                <tr>
+                    <td>@Model.Title</td>
+                    <td>@Model.ArticleCount</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
+</section>
 

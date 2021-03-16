@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PrgHome.DataLayer.Models;
@@ -27,7 +24,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
             _articleRep = _unitOfWork.GetRepository<Article>();
         }
-        public async Task<IActionResult> Index(int index=1,int row=5)
+        public async Task<IActionResult> Index(int index = 1, int row = 5)
         {
             int count = 0;
             var articles = Pagination.GetData<Article>(await _articleRep.FindAllAsync(false), ref count, row, index);
@@ -39,7 +36,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             {
                 Id = n.Id,
                 Image = n.Image,
-                CategoryTitle = n.Category==null?null:n.Category.Title,
+                CategoryTitle = n.Category == null ? null : n.Category.Title,
                 IsPublish = n.IsPublish,
                 PublishDate = n.PublishDate,
                 TimeToRead = n.TimeToRead,
@@ -87,7 +84,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
                 TimeToRead = article.TimeToRead,
                 IsPublish = article.IsPublish,
                 Title = article.Title,
-                View=0,
+                View = 0,
             };
             if (article.FormFile != null)
             {
@@ -116,7 +113,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(ArticleDto article)
         {
             Article editArticle = await _articleRep.FindByIDAsync(article.Id);
-            if (editArticle==null)
+            if (editArticle == null)
             {
                 return View("Error");
             }
@@ -141,7 +138,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             }
             if (article.FormFile != null)
             {
-                if (editArticle.Image!=null)
+                if (editArticle.Image != null)
                 {
                     await _fileWorker.RemoveFileAsync(editArticle.Image, "Files");
                 }
@@ -165,7 +162,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Details(int id)
         {
             Article article = await _articleRep.FindByIDAsync(id);
-            if (article==null)
+            if (article == null)
             {
                 return NotFound();
             }
@@ -181,7 +178,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Article article = await _articleRep.FindByIDAsync(id);
-            if (article==null)
+            if (article == null)
             {
                 return NotFound();
             }
@@ -195,7 +192,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            if (article.Image!=null)
+            if (article.Image != null)
             {
                 await _fileWorker.RemoveFileAsync(article.Image, "Files");
             }

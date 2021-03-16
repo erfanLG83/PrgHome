@@ -3,6 +3,13 @@
     ViewData["Title"] = "جزئیات";
 }
 
+@section Navbar{
+    <a asp-action="Index">مقالات</a>
+    <a asp-action="Create">افزودن</a>
+    <a href="#" class="active">جزئیات</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">ویرایش</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id">حذف</a>
+}
 <h1 class="text-dark">جزئیات مقاله @Model.Title</h1>
 <section class="margin-20">
     <p>
@@ -54,7 +61,7 @@
     </p>
     <p>
         <b>انتشار یافته؟ : </b>
-        <input type="checkbox" class="margin-rl-10" @(Model.IsPublish?"checked":"") disabled />
+        <input type="checkbox" class="margin-rl-10" @(Model.IsPublish ? "checked" : "") disabled />
     </p>
 
     @if (Model.Image == null)

@@ -1,6 +1,14 @@
 ﻿@model CategoryViewModel
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "حذف";
+}
+
+@section Navbar{
+    <a asp-action="Index">دسته بندی ها</a>
+    <a asp-action="Create">افزودن</a>
+    <a asp-action="Details" asp-route-id="@Model.Id">جزئیات</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" >ویرایش</a>
+    <a class="active" href="#">حذف</a>
 }
 <h2 class="text-dark">از حذف دسته بندی @Model.Title با تعداد @Model.ArticleCount مقاله مطمئن هستید ؟</h2>
 <section class="form-container">

@@ -2,9 +2,14 @@
 @{
     ViewData["Title"] = "افزودن دسته بندی";
 }
+
+@section Navbar{
+    <a asp-action="Index">دسته بندی ها</a>
+    <a href="#" class="active">افزودن</a>
+}
 <h2 class="text-dark">افزودن دسته بندی</h2>
 <section class="form-container">
-    <form method="post"asp-action="Create">
+    <form method="post" asp-action="Create">
         <section class="form-group">
             <label asp-for="Title">عنوان</label>
             <input type="text" asp-for="Title" class="form-group-control">
