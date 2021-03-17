@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PrgHome.DataLayer.IdentityClasses;
 using PrgHome.DataLayer.Mapping;
 using PrgHome.DataLayer.Models;
 
 namespace PrgHome.DataLayer
 {
-    public class PrgHomeContext : IdentityDbContext
+    public class PrgHomeContext
+        : IdentityDbContext<IdentityUser,
+            AppRole, string,
+            IdentityUserClaim<string>,
+            AppUserRole, IdentityUserLogin<string>,
+            IdentityRoleClaim<string>,
+            IdentityUserToken<string>>
     {
-        public PrgHomeContext(DbContextOptions<PrgHomeContext> options) : base(options) 
+        public PrgHomeContext(DbContextOptions<PrgHomeContext> options) : base(options)
         {
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -48,8 +52,8 @@ namespace PrgHome.DataLayer
             #region Identity Tables Mapping
 
             builder.Entity<IdentityUser>().ToTable("Users");
-            builder.Entity<IdentityRole>().ToTable("Roles");
-            builder.Entity<IdentityUserRole<string>>().ToTable("UsersRole");
+            builder.Entity<AppRole>().ToTable("Roles");
+            builder.Entity<AppUserRole>().ToTable("UsersRole");
 
             #endregion
         }
