@@ -27,6 +27,8 @@ namespace PrgHome.DataLayer.IdentityServices
         Task<string> GetRoleNameAsync(AppRole role);
         Task<IdentityResult> SetRoleNameAsync(AppRole role, string name);
         #endregion
+        public Task<IEnumerable<AppRole>> GetRoles();
+        public Task<AppRole> FindByIdWithUserRolesAsync(string id);
 
     }
 }

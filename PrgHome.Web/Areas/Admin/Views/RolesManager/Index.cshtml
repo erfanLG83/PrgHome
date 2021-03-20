@@ -1,0 +1,96 @@
+﻿@model IEnumerable<RoleViewModel>
+@{
+    ViewData["Title"] = "نقش ها";
+}
+
+@section Navbar{
+    <a href="#" class="active">نقش ها</a>
+    <a asp-action="Create"> افزودن نقش</a>
+}
+
+<section class="margin-20">
+    <h2 class="table-title animate__animated animate__fadeIn animate__delay-1s">نقش ها</h2>
+    <a asp-action="Create" class="create-link">
+        افزودن نقش
+        <i class="fas fa-upload"></i>
+    </a>
+    <section class="table-container">
+
+        <table class="table animate__animated animate__zoomIn animate__delay-1s ">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان</th>
+                    <th>تعداد کاربران دارنده نقش</th>
+                    <th>عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr data-row-id="@item.Id">
+                    <td>@item.Row</td>
+                    <td>@item.Title</td>
+                    <td>@item.UsersCount</td>
+                    <td class="d-flex">
+                        <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">جزئیات</a>
+                        <a class="btn btn-warning btn-sm margin-rl-10" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a>
+                        <a class="btn btn-danger btn-sm" onclick="removeAlert('@item.Title' , '@item.Id')">حذف</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+
+    <partial name="_PaginationPartial" model="ViewBag.PaginationModel" />
+    @section Scripts{ 
+        <script>
+            const removeAlert = (name, id) => {
+                swal('حذف نقش', `از حذف نقش ${name} مطمئن هستید ؟`, {
+                    icon:'warning',
+                    buttons: {
+                        cancel: {
+                            text: "نه",
+                            value: false,
+                            visible: true,
+                            className: "",
+                            closeModal: true,
+                        },
+                        confirm: {
+                            text: "اره",
+                            value: true,
+                            className: 'swal-button--danger',
+                            visible: true,
+                            closeModal: true
+                        }
+                    }
+                }).then(value => {
+                    if (value === true)
+                        remove(id);
+                    id = null;
+                });
+            }
+            const remove = (id) => {
+                fetch(`@(Url.Action("Delete","RolesManager"))/${id}`)
+                    .then(r => r.json())
+                    .then(d => {
+                        if (d.success) {
+                            
+                            swal('حذف نقش', 'حذف نقش با موفقیت انجام شد', 'success', {
+                                button: 'باشه'
+                            });
+                 
+                            }
+                        
+                        else
+                            swal('حذف نقش', d.error, 'error');
+                    })
+                    .catch(e => {
+                        swal('حذف نقش', 'در هنگام درخواست مشکلی پیش امده!', 'error');
+                    });
+                document.querySelector(`tr[data-row-id='${id}']`).remove();
+            }
+        </script>
+    }
+</section>

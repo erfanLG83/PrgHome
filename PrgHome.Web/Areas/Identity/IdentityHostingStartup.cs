@@ -16,7 +16,7 @@ namespace PrgHome.Web.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddIdentity<IdentityUser, AppRole>()
+                services.AddIdentity<AppUser, AppRole>()
                     .AddRoleManager<AppRoleManager>()
                     .AddEntityFrameworkStores<PrgHomeContext>()
                     .AddDefaultTokenProviders()

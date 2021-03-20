@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace PrgHome.DataLayer.IdentityClasses
 {
-    public class AppUserRole:IdentityUserRole<string>
+    public class AppUser:IdentityUser
     {
-        public AppRole Role { get; set; }
-        public AppUser User { get; set; }
+        public string Image { get; set; }
+        public virtual List<AppUserRole> UserRoles { get; set; }
     }
 }

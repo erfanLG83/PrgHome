@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using PrgHome.DataLayer.IdentityServices;
 
@@ -27,6 +30,17 @@ namespace PrgHome.DataLayer.IdentityClasses
             _keyNormalizer = lookupNormalizer;
             _errors = errorDescriber;
             _logger = logger;
+        }
+
+        public async Task<AppRole> FindByIdWithUserRolesAsync(string id)
+        {
+            return await Roles.Include(n => n.UserRoles).FirstAsync(n => n.Id == id);
+
+        }
+
+        public async Task<IEnumerable<AppRole>> GetRoles()
+        {
+            return await Roles.Include(n => n.UserRoles).ToListAsync();
         }
         
     }

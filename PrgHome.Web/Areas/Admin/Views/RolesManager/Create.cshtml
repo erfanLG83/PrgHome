@@ -1,0 +1,29 @@
+﻿@model RoleDto
+@{
+    ViewData["Title"] = "ایجاد نقش";
+}
+
+@section Navbar{
+    <a asp-action="Index">نقش ها</a>
+    <a href="#" class="active">افزودن</a>
+}
+<h2 class="text-dark">افزودن دسته بندی</h2>
+<section class="form-container">
+    <form method="post" asp-action="Create">
+        <div asp-validation-summary="All"></div>
+        <section class="form-group">
+            <label asp-for="Name">نام</label>
+            <input type="text" asp-for="Name" class="form-group-control">
+            <span class="danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="Description">توضیحات</label>
+            <textarea rows="30" class="form-group-control" asp-for="Description"></textarea>
+            <span class="danger"></span>
+        </section>
+        <button type="submit" class="btn btn-submit">
+            تایید
+        </button>
+    </form>
+</section>
+

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrgHome.DataLayer;
 
 namespace PrgHome.DataLayer.Migrations
 {
     [DbContext(typeof(PrgHomeContext))]
-    partial class PrgHomeContextModelSnapshot : ModelSnapshot
+    [Migration("20210319081714_ImageProfile_2")]
+    partial class ImageProfile_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,9 +216,19 @@ namespace PrgHome.DataLayer.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("RoleId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
 
                     b.ToTable("UsersRole");
                 });
@@ -388,17 +400,25 @@ namespace PrgHome.DataLayer.Migrations
 
             modelBuilder.Entity("PrgHome.DataLayer.IdentityClasses.AppUserRole", b =>
                 {
-                    b.HasOne("PrgHome.DataLayer.IdentityClasses.AppRole", "Role")
-                        .WithMany("UserRoles")
+                    b.HasOne("PrgHome.DataLayer.IdentityClasses.AppRole", null)
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PrgHome.DataLayer.IdentityClasses.AppUser", "User")
+                    b.HasOne("PrgHome.DataLayer.IdentityClasses.AppRole", "Role")
                         .WithMany("UserRoles")
+                        .HasForeignKey("RoleId1");
+
+                    b.HasOne("PrgHome.DataLayer.IdentityClasses.AppUser", null)
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("PrgHome.DataLayer.IdentityClasses.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Role");
 
@@ -433,11 +453,6 @@ namespace PrgHome.DataLayer.Migrations
                 });
 
             modelBuilder.Entity("PrgHome.DataLayer.IdentityClasses.AppRole", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("PrgHome.DataLayer.IdentityClasses.AppUser", b =>
                 {
                     b.Navigation("UserRoles");
                 });

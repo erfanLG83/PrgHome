@@ -36,13 +36,16 @@ namespace PrgHome.Web.Areas.Admin.Models
         public int? CategoryId { get; set; }
         [MaxLength(250, ErrorMessage = "لطفا توضیحات را کمتر از 250 کرکتر وارد کنید")]
         public string Description { get; set; }
-        public ModelValid IsValid(ArticleDto dto)
+        public ModelValid IsValid(ArticleDto dto,bool checkFormFile = true)
         {
             ModelValid modelValid = new ModelValid();
-            if (dto.FormFile==null)
+            if (checkFormFile)
             {
-                modelValid.Valid = false;
-                modelValid.Errors.Add("در صورت انتشار مقاله , باید عکس مقاله را وارد کنید");
+                if (dto.FormFile == null)
+                {
+                    modelValid.Valid = false;
+                    modelValid.Errors.Add("در صورت انتشار مقاله , باید عکس مقاله را وارد کنید");
+                }
             }
             if (!dto.TimeToRead.HasValue || dto.TimeToRead.Value == 0)
             {

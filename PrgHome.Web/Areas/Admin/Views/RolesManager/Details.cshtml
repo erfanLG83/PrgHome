@@ -1,0 +1,29 @@
+﻿@model RoleDetailsViewModel
+@{
+    ViewData["Title"] = "جزئیات";
+}
+
+@section Navbar{
+    <a asp-action="Index">نقش ها</a>
+    <a asp-action="Create">افزودن</a>
+    <a href="#" class="active">جزئیات</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">ویرایش</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id">حذف</a>
+}
+<h1 class="text-dark">جزئیات نقش @Model.Title</h1>
+<section class="margin-20">
+    <p>
+        <b>نام : </b>
+        @Model.Title
+    </p>
+    <p>
+        <b>تعداد کاربران دارنده نقش : </b>
+        @Model.UsersCount
+    </p>
+    <p>
+        <b>توضیحات :</b>
+        @Model.Description
+    </p>
+</section>
+
+

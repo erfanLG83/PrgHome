@@ -711,10 +711,14 @@ label {
     padding: 10px;
     font-size: 20px;
 }
+/*Sweet Alert Styles*/
+.swal-modal > .swal-footer{
+    display:flex;
+    justify-content:flex-end
+}
 /*Image Styles*/
-
-.img-contain{
-    max-width:100%;
+.img-contain {
+    max-width: 100%;
 }
 
 /*Responsive Styles For Minmize 980px*/

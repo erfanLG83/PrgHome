@@ -38,7 +38,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             model.Articles = articles.Select(n => new ArticleViewModel
             {
                 Title = n.Title,
-                CategoryTitle = n.Category.Title,
+                CategoryTitle = n.Category==null?null:n.Category.Title,
                 Image = n.Image,
                 IsPublish =n.IsPublish,
                 PublishDate = n.PublishDate,

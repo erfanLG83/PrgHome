@@ -8,6 +8,14 @@ namespace PrgHome.DataLayer.IdentityClasses
 {
     public class AppRole:IdentityRole
     {
+        public AppRole():base()
+        {
+        }
+
+        public AppRole(string name) : base(name)
+        {
+        }
         public string Description { get; set; }
+        public virtual List<AppUserRole> UserRoles { get; set; }
     }
 }

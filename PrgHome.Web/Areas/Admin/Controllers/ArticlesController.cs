@@ -96,6 +96,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             }
             await _articleRep.CreateAsync(createArticle);
             await _unitOfWork.Commit();
+            Popup.PopupModel = new Popup("افزودن مقاله", $"افزودن مقاله با عنوان <b> {article.Title} </b> با موفقیت انجام شد", IconType.Success);
             return RedirectToAction("Index");
         }
 
@@ -125,7 +126,10 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             ModelValid model = new ModelValid();
             if (article.IsPublish)
             {
-                model = article.IsValid(article);
+                if (editArticle.Image != null)
+                    model = article.IsValid(article, false);
+                else
+                    model = article.IsValid(article);
             }
             if (!model.Valid)
             {
@@ -198,6 +202,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             }
             _articleRep.Delete(article);
             await _unitOfWork.Commit();
+            Popup.PopupModel = new Popup("حذف مقاله", $"حذف مقاله با عنوان {article.Title} با موفقیت انجام شد", IconType.Success);
             return RedirectToAction(nameof(Index));
         }
     }

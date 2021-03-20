@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PrgHome.DataLayer;
+using PrgHome.DataLayer.IdentityClasses;
+using PrgHome.DataLayer.IdentityServices;
 using PrgHome.DataLayer.UnitOfWork;
 using PrgHome.Web.Classes;
 using PrgHome.Web.Services;
@@ -29,6 +33,9 @@ namespace PrgHome.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddControllersWithViews();
+            //services.AddRazorPages();
             services.Configure<CookiePolicyOptions>(op =>
             {
                 op.CheckConsentNeeded = context=>true;
@@ -39,15 +46,19 @@ namespace PrgHome.Web
                 op.IdleTimeout = TimeSpan.FromMinutes(20);
                 op.Cookie.HttpOnly = true;
             });
-            services.AddControllersWithViews();
             services.AddDbContext<PrgHomeContext>(options=>
             {
                 options.UseSqlServer(@"Server=.;Database=PrgHomeDB;trusted_Connection=True");
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFileWorker, FileWorker>();
-            services.AddScoped<UserManager<IdentityUser>>();
-            services.AddRazorPages();
+            services.AddScoped<IAppRoleManager, AppRoleManager>();
+            services.AddScoped<UserManager<AppUser>>();
+            services.AddSingleton<HtmlEncoder>(
+                HtmlEncoder.Create(allowedRanges: new[] {
+                    UnicodeRanges.BasicLatin,
+                    UnicodeRanges.Arabic 
+                }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,30 +74,24 @@ namespace PrgHome.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapRazorPages();
                 endpoints.MapAreaControllerRoute(
                     name:"admin",
                     areaName:"admin",
                     pattern: "admin/{controller=Dashboard}/{action=Index}/{id?}"
                     );
-                endpoints.MapAreaControllerRoute(
-                     name:"Identity",
-                     areaName:"Identity",
-                     pattern:""
-
-                    );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                //endpoints.MapRazorPages();
             });
         }
     }

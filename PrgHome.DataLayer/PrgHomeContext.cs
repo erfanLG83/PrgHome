@@ -8,12 +8,16 @@ using PrgHome.DataLayer.Models;
 namespace PrgHome.DataLayer
 {
     public class PrgHomeContext
-        : IdentityDbContext<IdentityUser,
+        : IdentityDbContext
+        <
+            AppUser,
             AppRole, string,
             IdentityUserClaim<string>,
-            AppUserRole, IdentityUserLogin<string>,
+            AppUserRole,
+            IdentityUserLogin<string>,
             IdentityRoleClaim<string>,
-            IdentityUserToken<string>>
+            IdentityUserToken<string>
+         >
     {
         public PrgHomeContext(DbContextOptions<PrgHomeContext> options) : base(options)
         {
@@ -28,6 +32,16 @@ namespace PrgHome.DataLayer
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new ArticleMap());
             builder.ApplyConfiguration(new CommentMap());
+            builder.Entity<AppUserRole>()
+                .HasOne(n => n.Role)
+                .WithMany(n => n.UserRoles)
+                .HasForeignKey(n => n.RoleId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<AppUserRole>()
+                .HasOne(n => n.User)
+                .WithMany(n => n.UserRoles)
+                .HasForeignKey(n => n.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Category>()
                 .Property(n => n.Title)
                 .IsRequired()
@@ -51,7 +65,7 @@ namespace PrgHome.DataLayer
                 .IsUnicode(false);
             #region Identity Tables Mapping
 
-            builder.Entity<IdentityUser>().ToTable("Users");
+            builder.Entity<AppUser>().ToTable("Users");
             builder.Entity<AppRole>().ToTable("Roles");
             builder.Entity<AppUserRole>().ToTable("UsersRole");
 
@@ -61,5 +75,6 @@ namespace PrgHome.DataLayer
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<File> Files { get; set; }
+        
     }
 }

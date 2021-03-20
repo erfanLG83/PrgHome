@@ -55,42 +55,27 @@
             </header>
             <ul>
                 <li>
-                    <a href="#">
+                    <a asp-action="Index" asp-controller="Dashboard">
                         داشبورد <i class="fas fa-home"></i>
                     </a>
                 </li>
                 <h3 class="sidebar-title">مدیریت محتوا</h3>
                 <li>
-                    <a href="#">
-                        داشبورد <i class="fas fa-podcast"></i>
+                    <a asp-action="Index" asp-controller="Categories">
+                        دسته بندی ها <i class="fas fa-podcast"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-action="Index" asp-controller="Articles">
                         مقالات <i class="fas fa-camera"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        دسته بندی ها <i class="fas  fa-home"></i>
+                    <a asp-action="Create" asp-controller="Articles">
+                        ایجاد مقاله <i class="fas fa-building"></i>
                     </a>
                 </li>
-                <h3 class="sidebar-title">مدیریت محتوا</h3>
-                <li>
-                    <a href="#">
-                        داشبورد <i class="fas fa-podcast"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        مقالات <i class="fas fa-camera"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        دسته بندی ها <i class="fas  fa-home"></i>
-                    </a>
-                </li>
+
                 <h3 class="sidebar-title">
                     کاربری
                     <i class="fas  fa-user"></i>
@@ -119,6 +104,21 @@
     </div>
 
     <script src="~/js/admin.js"></script>
-    @RenderSection("Scripts",false)
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @if (Popup.IsShow)
+    {
+        <script>
+            swal({
+                title: "@Popup.PopupModel.Title",
+                text: "@Popup.PopupModel.Message",
+                icon: "@Popup.PopupModel.IconType.ToString().ToLower()",
+                buttons:"@(Popup.PopupModel.ButtonText == null?"باشه":Popup.PopupModel.ButtonText)"
+
+            });
+        </script>
+        @(Popup.PopupModel=null)
+    }
+
+    @RenderSection("Scripts", false)
 </body>
 </html>
