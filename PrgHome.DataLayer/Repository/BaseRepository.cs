@@ -9,8 +9,8 @@ namespace PrgHome.DataLayer.Repository
 {
     public class BaseRepository<TEntity, TContext> : IRepositoryBase<TEntity> where TEntity : class where TContext : DbContext
     {
-        private TContext _context;
-        private DbSet<TEntity> _entity;
+        private readonly TContext _context;
+        private readonly DbSet<TEntity> _entity;
         public BaseRepository(TContext context)
         {
             _context = context;

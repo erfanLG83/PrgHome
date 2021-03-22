@@ -52,8 +52,9 @@ namespace PrgHome.Web
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFileWorker, FileWorker>();
+            services.AddScoped<AppIdentityErrorDescriber>();
             services.AddScoped<IAppRoleManager, AppRoleManager>();
-            services.AddScoped<UserManager<AppUser>>();
+            services.AddScoped<IAppUserManager,AppUserManager>();
             services.AddSingleton<HtmlEncoder>(
                 HtmlEncoder.Create(allowedRanges: new[] {
                     UnicodeRanges.BasicLatin,

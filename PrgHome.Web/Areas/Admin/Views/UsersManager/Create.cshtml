@@ -1,0 +1,90 @@
+﻿@model UserCreateDto
+@{
+    ViewData["Title"] = "افزودن کاربر";
+}
+@section Styles{
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@1.1/dist/css/tom-select.css" rel="stylesheet">
+}
+@section Navbar{
+    <a asp-action="Index">کاربران</a>
+    <a href="#" class="active">افزودن</a>
+}
+<h2 class="text-dark">افزودن کاربر</h2>
+<section class="form-container">
+    <form method="post" enctype="multipart/form-data" asp-action="Create">
+        <div asp-validation-summary="All">
+
+        </div>
+        <section class="form-group">
+            <label asp-for="Username"></label>
+            <input type="text" asp-for="Username" class="form-group-control">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="Email">ایمیل</label>
+            <input asp-for="Email" class="form-group-control">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="PhoneNumber">تلفن(اختیاری)</label>
+            <input asp-for="PhoneNumber" class="form-group-control">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="UserRoles">نقش ها</label>
+            <div id="disable-wrapper" style="position:relative">
+                <input type="text" asp-for="UserRoles" id="disable-backspace" autocomplete="off">
+                <input type="text" id="input-disable-control" class="form-control mt-2" autocomplete="off" placeholder="تقش ها را انتخاب کنید">
+            </div>
+        </section>
+
+        <section class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-group-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="ConfirmPassword"></label>
+            <input asp-for="ConfirmPassword" class="form-group-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </section>
+        <section class="form-group flex-row mt-20">
+            <label asp-for="ImageFile">تصویر پروفایل</label>
+            <input asp-for="ImageFile" type="file" />
+        </section>
+
+        <button type="submit" class="btn btn-submit">
+            تایید
+        </button>
+    </form>
+</section>
+@section Scripts{
+    <script src="~/js/tom-select.base.min.js"></script>
+    <script src="~/js/remove_button.js"></script>
+    <script src="~/js/no_backspace_delete.js"></script>
+    <script>
+        new TomSelect('#disable-backspace', {
+            plugins: ['no_backspace_delete', 'remove_button',],
+            persist: false,
+            create: false,
+            controlInput: '#input-disable-control',
+            dropdownParent: '#disable-wrapper',
+            valueField: 'title',
+            labelField: 'title',
+            searchField: 'title',
+            options: [
+                @{ 
+                    string roles = "";
+                    foreach (var item in ViewBag.Roles)
+                    {
+                        roles += "{ title:'" +
+                            item+
+                    "'},";
+                    }
+                }
+                @Html.Raw(roles)
+            ],
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial"/>
+}

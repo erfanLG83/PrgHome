@@ -3,7 +3,8 @@
     public enum IconType
     {
         Success,
-        Warning
+        Warning,
+        Error
     }
     public class Popup
     {

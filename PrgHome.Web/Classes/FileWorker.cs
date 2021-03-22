@@ -60,5 +60,16 @@ namespace PrgHome.Web.Classes
                 );
             await _unitOfWork.Commit();
         }
+        public async Task<string> EncodeFormFile(IFormFile file)
+        {
+            byte[] bytes;
+            using (Stream stream = file.OpenReadStream())
+            {
+                using MemoryStream ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                bytes = ms.ToArray();
+            }
+            return $"data:{file.ContentType};base64,{Convert.ToBase64String(bytes)}";
+        }
     }
 }

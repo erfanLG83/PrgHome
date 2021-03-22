@@ -10,5 +10,6 @@ namespace PrgHome.Web.Services
     {
         public Task<string> SaveFileAsync(IFormFile file, string path);
         public Task RemoveFileAsync(string fileName, string path);
+        public Task<string> EncodeFormFile(IFormFile file);
     }
 }

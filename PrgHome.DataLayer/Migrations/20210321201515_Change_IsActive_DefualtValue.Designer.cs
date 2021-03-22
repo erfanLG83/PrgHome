@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrgHome.DataLayer;
 
 namespace PrgHome.DataLayer.Migrations
 {
     [DbContext(typeof(PrgHomeContext))]
-    partial class PrgHomeContextModelSnapshot : ModelSnapshot
+    [Migration("20210321201515_Change_IsActive_DefualtValue")]
+    partial class Change_IsActive_DefualtValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

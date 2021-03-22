@@ -68,6 +68,10 @@ namespace PrgHome.DataLayer
             builder.Entity<AppUser>().ToTable("Users");
             builder.Entity<AppRole>().ToTable("Roles");
             builder.Entity<AppUserRole>().ToTable("UsersRole");
+            builder.Entity<AppUser>()
+                .Property(b => b.IsActive)
+                .IsRequired()
+                .HasDefaultValue(true);
 
             #endregion
         }
@@ -75,6 +79,6 @@ namespace PrgHome.DataLayer
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<File> Files { get; set; }
-        
+
     }
 }

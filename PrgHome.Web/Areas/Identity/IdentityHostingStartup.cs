@@ -17,10 +17,14 @@ namespace PrgHome.Web.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
                 services.AddIdentity<AppUser, AppRole>()
-                    .AddRoleManager<AppRoleManager>()
-                    .AddEntityFrameworkStores<PrgHomeContext>()
-                    .AddDefaultTokenProviders()
-                    .AddErrorDescriber<AppIdentityErrorDescriber>();
+                .AddEntityFrameworkStores<PrgHomeContext>()
+                .AddDefaultTokenProviders()
+                .AddErrorDescriber<AppIdentityErrorDescriber>();
+                //    .AddRoleManager<AppRoleManager>()
+                //    .AddUserManager<AppUserManager>()
+                //    .AddEntityFrameworkStores<PrgHomeContext>()
+                //    .AddDefaultTokenProviders()
+                //    .AddErrorDescriber<AppIdentityErrorDescriber>();
                 services.Configure<IdentityOptions>(op =>
                 {
                     op.Password.RequireLowercase = false;

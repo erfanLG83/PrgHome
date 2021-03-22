@@ -503,7 +503,10 @@ footer>p {
     justify-content: center;
     align-items: center;
 }
-
+.flex-row{
+    flex-direction:row !important;
+    justify-content:space-between !important;
+}
 .btn.btn-sm {
     padding: 5px 10px;
     width: 70px;
@@ -553,20 +556,22 @@ footer>p {
     margin-bottom: 1.5rem;
     color: #fff;
     display: flex;
-    align-items: center;
-    justify-content:space-between
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
 }
 
-.form-group label {
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: 700;
-}
+    .form-group label {
+        font-size: 20px;
+        cursor: pointer;
+        padding-right: 2em;
+        padding-bottom: 5px;
+        font-weight: 700;
+    }
 
 .form-group .form-group-control {
     width: 100% !important;
     height: 40px;
-    margin-right: 1rem;
     background-color: #232e48;
     border: 1px solid rgba(226, 232, 245, 0.1);
     border-radius: 3px;
@@ -592,7 +597,15 @@ footer>p {
 .form-group.form-group-checkbox input {
     margin: 0 20px;
 }
-
+.field-validation-error {
+    padding-top: 4px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.text-danger {
+    background-color: transparent ;
+    color: #b30000 ;
+}
 .btn.btn-submit {
     width: 171px;
     height: 65px;
