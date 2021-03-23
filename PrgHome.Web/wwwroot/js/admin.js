@@ -16,3 +16,33 @@ profileToggle.addEventListener('click', () => {
         profileClose();
     }
 })
+const liveImage = (inputId, imgId,toggleId) => {
+    let inputElem = document.querySelector("#" + inputId);
+    let imgElem = document.querySelector("#" + imgId);
+    let toggleElem = document.querySelector("#" + toggleId);
+    inputElem.addEventListener('change',() => {
+        if (inputElem.files.length > 0) {
+            toggleElem.classList.remove('hidden');
+            imgElem.src = URL.createObjectURL(inputElem.files[0]);
+            imgElem.classList.add('animate__fadein');
+            setTimeout(() => {
+                imgElem.classList.remove('animate__fadein');
+            }, 1000)
+            imgElem.setAttribute('data-last-img', 'false');
+            document.querySelector('#LastImageDeleted').value = "true";
+        }
+    })
+    toggleElem.addEventListener('click', () => {
+        if (imgElem.getAttribute('data-last-img') === "true") {
+            imgElem.setAttribute('data-last-img', 'false');
+            document.querySelector('#LastImageDeleted').value = "true";
+        }
+        inputElem.value = null;
+        toggleElem.classList.add('hidden');
+        imgElem.classList.add('animate__fadeout');
+        setTimeout(() => {
+            imgElem.src = imgElem.getAttribute('data-default-src');
+            imgElem.classList.replace('animate__fadeout', 'animate__fadein');
+        }, 500);
+    });
+}

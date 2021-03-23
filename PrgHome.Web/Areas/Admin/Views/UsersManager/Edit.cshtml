@@ -1,0 +1,110 @@
+﻿@model UserEditDto
+@{
+    ViewData["Title"] = "افزودن کاربر";
+}
+@section Styles{
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@1.1/dist/css/tom-select.css" rel="stylesheet">
+}
+@section Navbar{
+
+    <a asp-action="Index">کاربران</a>
+    <a asp-action="Create">افزودن</a>
+    <a asp-action="Details" asp-route-id="@Model.Id">جزئیات</a>
+    <a href="#" class="active">ویرایش</a>
+}
+<h2 class="text-dark">ویرایش کاربر</h2>
+<section class="form-container">
+    <form method="post" enctype="multipart/form-data" asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="LastImageDeleted" />
+        <div asp-validation-summary="All">
+
+        </div>
+        <section class="form-group">
+            <label asp-for="Username"></label>
+            <input type="text" asp-for="Username" class="form-group-control">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="Email">ایمیل</label>
+            <input asp-for="Email" class="form-group-control">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="PhoneNumber">تلفن(اختیاری)</label>
+            <input asp-for="PhoneNumber" class="form-group-control">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </section>
+        <section class="form-group">
+            <label asp-for="UserRoles">نقش ها</label>
+            <div id="disable-wrapper" style="position:relative">
+                <input type="text" asp-for="UserRoles" id="disable-backspace" autocomplete="off">
+                <input type="text" id="input-disable-control" class="form-control mt-2" autocomplete="off" placeholder="تقش ها را انتخاب کنید">
+            </div>
+        </section>
+
+        <section class="form-group flex-row">
+            <label asp-for="EmailConfirmed">تایید ایمیل؟</label>
+            <label class="switch">
+                <input type="checkbox" asp-for="EmailConfirmed">
+                <div class="slider round"></div>
+            </label>
+        </section>
+        <section class="form-group flex-row">
+            <label asp-for="IsLockout">قفل/باز</label>
+            <label class="switch">
+                <input type="checkbox" asp-for="IsLockout">
+                <div class="slider round"></div>
+            </label>
+        </section>
+        <section class="form-group flex-row">
+            <label asp-for="IsActive">فعال/غیرفعال</label>
+            <label class="switch">
+                <input type="checkbox" asp-for="IsActive">
+                <div class="slider round"></div>
+            </label>
+        </section>
+        <section class="form-group flex-row">
+            <label asp-for="ImageFile">تصویر پروفایل</label>
+            <input asp-for="ImageFile" type="file" />
+        </section>
+        <section class="d-flex mt-20">
+            <img data-default-src="/images/avatar.svg" data-last-img="@(Model.LastImage==null?"false":"true")" class="img-contain animate__animated " id="profile-img" src="@(Model.LastImage==null?"/images/avatar.svg":Model.LastImage)" />
+            <i id="remove-icon" class="fas fa-times @(Model.LastImage==null?"hidden":"")"></i>
+        </section>
+        <button type="submit" class="btn btn-submit">
+            تایید
+        </button>
+    </form>
+</section>
+@section Scripts{
+    <script src="~/js/tom-select.base.min.js"></script>
+    <script src="~/js/remove_button.js"></script>
+    <script src="~/js/no_backspace_delete.js"></script>
+    <script>
+        new TomSelect('#disable-backspace', {
+            plugins: ['no_backspace_delete', 'remove_button',],
+            persist: false,
+            create: false,
+            controlInput: '#input-disable-control',
+            dropdownParent: '#disable-wrapper',
+            valueField: 'title',
+            labelField: 'title',
+            searchField: 'title',
+            options: [
+                @{
+                    string roles = "";
+                    foreach (var item in ViewBag.Roles)
+                    {
+                        roles += "{ title:'" +
+                            item+
+                    "'},";
+                    }
+                }
+                @Html.Raw(roles)
+            ],
+        });
+        liveImage('ImageFile', 'profile-img','remove-icon');
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -6,6 +6,7 @@ using PrgHome.DataLayer.IdentityClasses;
 using PrgHome.DataLayer.IdentityServices;
 using PrgHome.Web.Areas.Admin.Models.User;
 using PrgHome.Web.Classes;
+using PrgHome.Web.Models;
 using PrgHome.Web.Services;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
@@ -20,6 +21,11 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             _fileWorker = fileWorker;
             _userManager = userManager;
             _roleManager = roleManager;
+        }
+        private async Task SetRoles()
+        {
+            IEnumerable<AppRole> roles = await _roleManager.GetRoles();
+            ViewBag.Roles = roles.Select(n => n.Name);
         }
         public async Task<IActionResult> Index(int index = 1, int row = 5)
         {
@@ -37,8 +43,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            IEnumerable<AppRole> roles = await _roleManager.GetRoles();
-            ViewBag.Roles = roles.Select(n => n.Name);
+            await SetRoles();
             return View();
         }
         [HttpPost]
@@ -63,7 +68,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
                 else
                 {
                     Popup.PopupModel = new Popup("افزودن کاربر", $"کاربر {user.Username} با موفقیا اضافه شد.", IconType.Success);
-                    if (! string.IsNullOrEmpty(user.UserRoles))
+                    if (!string.IsNullOrEmpty(user.UserRoles))
                     {
                         result = await _userManager.AddToRolesAsync(createUser, user.UserRoles.Split(','));
                         if (!result.Succeeded)
@@ -79,9 +84,116 @@ namespace PrgHome.Web.Areas.Admin.Controllers
                 }
 
             }
-            IEnumerable<AppRole> roles = await _roleManager.GetRoles();
-            ViewBag.Roles = roles.Select(n => n.Name);
+            await SetRoles();
             return View(user);
+        }
+        public async Task<IActionResult> Edit(string id)
+        {
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                Popup.PopupModel = new Popup("خطا", $"کاربری با نشانی '{id}' پیدا نشده!", IconType.Error);
+                return RedirectToAction("Index");
+            }
+            await SetRoles();
+
+            return View(new UserEditDto(user, await _userManager.GetRolesAsync(user)));
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(UserEditDto user)
+        {
+            AppUser editUser = await _userManager.FindByIdAsync(user.Id);
+            if (user.ImageFile != null)
+                editUser.Image = await _fileWorker.EncodeFormFile(user.ImageFile);
+            else if (user.LastImageDeleted)
+                editUser.Image = null;
+            bool updated = false;
+            if (ModelState.IsValid)
+            {
+                editUser.Email = user.Email;
+                editUser.EmailConfirmed = user.EmailConfirmed;
+                editUser.LockoutEnabled = user.IsLockout;
+                editUser.UserName = user.Username;
+                editUser.IsActive = user.IsActive;
+                editUser.PhoneNumber = user.PhoneNumber;
+                var result = await _userManager.UpdateAsync(editUser);
+                updated = true;
+                if (result.Succeeded)
+                {
+                    Popup.PopupModel = new Popup("ویرایش کاربر", $"ویرایش کاربر {editUser.UserName} با موفقیت صورت گرفت", IconType.Success);
+                    #region update user roles
+                    var roles = user.UserRoles.Split(',');
+                    var recentRoles = await _userManager.GetRolesAsync(editUser);
+                    var deletedRoles = recentRoles.Except(roles).ToArray();
+                    var addedRoles = roles.Except(recentRoles).ToArray();
+                    if (deletedRoles.Length != 0)
+                    {
+                        result = await _userManager.RemoveFromRolesAsync(editUser, deletedRoles);
+                    }
+                    if (addedRoles.Length != 0)
+                    {
+                        result = await _userManager.AddToRolesAsync(editUser, addedRoles);
+                    }
+                    #endregion
+                    if (!result.Succeeded)
+                    {
+                        Popup.PopupModel = new Popup("ویرایش کاربر", $"در هنگام افزودن نقش به کاربر {editUser.UserName} خطایی صورت گرفت.", IconType.Error);
+                        if (result.Errors.Any())
+                        {
+                            Popup.PopupModel.Message += "\n\n" + result.Errors.First().Description;
+                        }
+                    }
+                    return RedirectToAction("Index");
+                }
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.Code, item.Description);
+                }
+            }
+            if (updated && user.LastImageDeleted)
+            {
+                var result = await _userManager.UpdateAsync(editUser);
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.Code, item.Description);
+                }
+            }
+            user.LastImageDeleted = false;
+            user.LastImage = editUser.Image;
+            await SetRoles();
+            return View(user);
+        }
+        public async Task<IActionResult> Delete(string id)
+        {
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user==null)
+            {
+                return Json(new JsonResponse(false,"کاربر پیدا نشد!"));
+            }
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return Json(new JsonResponse(true));
+            }
+            JsonResponse response = new JsonResponse(false);
+            if (result.Errors.Any())
+            {
+                response.ErrorMessage = result.Errors.First().Description;
+            }
+            return Json(response);
+        }
+        public async Task<IActionResult> Details(string id)
+        {
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user==null)
+            {
+                Popup.PopupModel = new Popup("خطا", $"کاربری با نشانی '{id}' پیدا نشده!", IconType.Error);
+                return RedirectToAction("Index");
+            }
+            UserDetailsViewModel model = new UserDetailsViewModel(user, await _userManager.GetRolesAsync(user));
+            return View(model);
         }
     }
 }

@@ -1,0 +1,71 @@
+﻿@model UserDetailsViewModel
+@{
+    ViewData["Title"] = "جزئیات کاربر";
+}
+@section Navbar{
+    <a asp-action="Index">کاربران</a>
+    <a asp-action="Create">افزودن</a>
+    <a href="#" class="active">جزئیات</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">ویرایش</a>
+}
+
+<h1 class="text-dark">
+    جزئیات کاربر @Model.UserName
+</h1>
+<section class="margin-20">
+    <section class="table-container">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>نام کاربری</td>
+                    <td>@Model.UserName</td>
+                </tr>
+                <tr>
+                    <td>ایمیل</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td>ایمیل تایید شده ؟</td>
+                    <td><input asp-for="EmailConfirmed" disabled /></td>
+                </tr>
+                <tr>
+                    <td>شماره تلفن</td>
+                    <td>@(Model.PhoneNumber == null ? "---" : Model.PhoneNumber)</td>
+                </tr>
+                <tr>
+                    <td>نقش ها</td>
+                    <td>
+                        @foreach (var item in Model.Roles)
+                        {
+                            <span class="badge badge-primary">@item</span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>فعال/غیرفعال</td>
+                    <td><input asp-for="IsActive" disabled /></td>
+                </tr>
+                <tr>
+                    <td>امکان قفل شدن؟</td>
+                    <td><input asp-for="LockoutEnabled" disabled /></td>
+                </tr>
+                <tr>
+                    <td>تعداد ورود های ناموفق</td>
+                    <td>@Model.AccessFailedCount</td>
+                </tr>
+                <tr>
+                    <td>زمان باقی مانده قفل</td>
+                    <td>@(Model.LockoutEnd.HasValue ? Model.LockoutEnd.Value.UtcDateTime.ToString() : "---")</td>
+                </tr>
+                <tr>
+                    <td>احضار هویت دو مرحله ای؟</td>
+                    <td><input asp-for="TwoFactorEnabled" disabled /></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <section class="mt-20 d-flex">
+            <img class="img-contain" id="profile-img" src="@(Model.Image==null?"/images/avatar.svg":Model.Image)" />
+        </section>
+    </section>
+</section>

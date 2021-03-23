@@ -77,16 +77,21 @@
                 </li>
 
                 <h3 class="sidebar-title">
-                    کاربری
-                    <i class="fas  fa-user"></i>
+                    مدیریت کاربران
+                    <i class="fas fa-user"></i>
                 </h3>
 
                 <li>
-                    <a href="#">
-                        تنظیمات <i class="fas fa-cog"></i>
+                    <a asp-action="Index" asp-controller="UsersManager">
+                        کاربران <i class="fas fa-users"></i>
                     </a>
                 </li>
 
+                <li>
+                    <a asp-action="Index" asp-controller="RolesManager">
+                        نقش ها <i class="fas fa-rocket"></i>
+                    </a>
+                </li>
                 <li>
                     <a class="danger" href="#">
                         خروج <i class="fas fa-power-off"></i>
@@ -110,7 +115,7 @@
         <script>
             swal({
                 title: "@Popup.PopupModel.Title",
-                text: "@Popup.PopupModel.Message",
+                text: `@Html.Raw(Popup.PopupModel.Message)`,
                 icon: "@Popup.PopupModel.IconType.ToString().ToLower()",
                 buttons:"@(Popup.PopupModel.ButtonText == null?"باشه":Popup.PopupModel.ButtonText)"
 

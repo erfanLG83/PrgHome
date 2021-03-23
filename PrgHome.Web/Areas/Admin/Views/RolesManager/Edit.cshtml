@@ -1,6 +1,6 @@
 ﻿@model RoleDto
 @{
-    ViewData["Title"] = "ایجاد نقش";
+    ViewData["Title"] = "ویرایش نقش";
 }
 
 @section Navbar{
@@ -8,7 +8,6 @@
     <a asp-action="Create" >افزودن</a>
     <a asp-action="Details" asp-route-id="@Model.Id">جزئیات</a>
     <a href="#" class="active">ویرایش</a>
-    <a asp-action="Delete" asp-route-id="@Model.Id">حذف</a>
 }
 <h2 class="text-dark">افزودن دسته بندی</h2>
 <section class="form-container">

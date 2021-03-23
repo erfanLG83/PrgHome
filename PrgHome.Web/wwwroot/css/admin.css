@@ -622,6 +622,59 @@ footer>p {
 .btn.btn.btn-submit:hover {
     box-shadow: 0px 0px 16px #c80de0;
 }
+/*Toggle Switch*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+.switch input:checked + .slider {
+    background-color: #2196F3;
+}
+
+.switch input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+.switch input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
 
 .text-editor {
     padding: 10px;
@@ -729,13 +782,39 @@ label {
     display:flex;
     justify-content:flex-end
 }
+.swal-text{
+    text-align:right !important;
+}
 /*Image Styles*/
 .img-contain {
     max-width: 100%;
+    max-height: 200px;
 }
-
+.img-round{
+    border-radius:50%
+}
+#profile-img {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    max-width: 200px;
+}
+#remove-icon {
+    cursor:pointer;
+    font-size: 50px;
+    position: absolute;
+    color: #ff0000;
+    opacity:.26;
+    transition:opacity .5s ease-in-out;
+    
+}
+#profile-img:hover + #remove-icon, #remove-icon:hover{
+    opacity: 1;
+}
+.hidden{
+    visibility:hidden;
+}
 /*Responsive Styles For Minmize 980px*/
-
 @media only screen and (max-width: 980px) {
     .sidebar>header {
         flex-direction: column;

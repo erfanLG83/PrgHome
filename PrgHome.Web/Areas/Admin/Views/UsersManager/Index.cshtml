@@ -30,7 +30,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr data-row-id="@item.Id">
                         <td>@item.Row</td>
                         <td>@item.UserName</td>
                         <td>
@@ -51,7 +51,7 @@
                         <td class="d-flex">
                             <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">جزئیات</a>
                             <a class="btn btn-warning btn-sm margin-rl-10" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a>
-                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                            <a class="btn btn-danger btn-sm" onclick="removeAlert('@item.Id','@item.UserName')">حذف</a>
                         </td>
                     </tr>
                 }
@@ -60,4 +60,56 @@
     </section>
     <partial name="_PaginationPartial" model="ViewBag.PaginationModel" />
 </section>
+@section Scripts{ 
+<script>
+    const removeAlert = (id,name) => {
+        swal('حذف کاربر', `
+                از حذف کاربر ${name} مطئن هستید ؟
+در صورت حذف , همه اطلاعات مربوط به کاربر پاک میشوند !
+پیشنهاد میکنم کاربر را غیرفعال کنید...
+             `, {
+                icon: "warning",
+                 buttons: {
+                        cancel: {
+                            text: "نه",
+                            value: false,
+                            visible: true,
+                            className: "",
+                            closeModal: true,
+                        },
+                        confirm: {
+                            text: "اره",
+                            value: true,
+                            className: 'swal-button--danger',
+                            visible: true,
+                            closeModal: true
+                        }
+                    }
+        }).then(value => {
+            if (value === true) {
+                remove(id);
+            }
+        });
+    }
+    const remove = (id) => {
+                fetch(`@(Url.Action("Delete","UsersManager"))/${id}`)
+                    .then(r => r.json())
+                    .then(d => {
+                        if (d.success) {
+                            
+                            swal('حذف نقش', 'حذف کاربر با موفقیت انجام شد', 'success', {
+                                button: 'باشه'
+                            });
+                            document.querySelector(`tr[data-row-id='${id}']`).remove();
+                        }
 
+                        
+                        else
+                            swal('حذف نقش', d.error, 'error', { button:"باشه" });
+                    })
+                    .catch(e => {
+                        swal('حذف نقش', 'در هنگام درخواست مشکلی پیش امده!', 'error' ,"باشه");
+                    });
+            }
+</script>
+}
