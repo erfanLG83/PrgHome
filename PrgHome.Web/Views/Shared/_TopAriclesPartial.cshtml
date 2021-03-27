@@ -1,0 +1,31 @@
+﻿@inject IArticleRepository articleRep
+@{
+    var articles = await articleRep.GetTopArticlesAsync();
+}
+    <div class="abt-2">
+        <h3>مقالات برتر</h3>
+        @foreach (var item in articles)
+        {
+            <div class="might-grid">
+                <div class="grid-might">
+                    <a href="#"><img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive" alt=""> </a>
+                </div>
+                <div class="might-top">
+                    <h4>
+                        <a class="state-container" href="single.html">
+                            @item.Title
+                            <span class="state"><i class="glyphicon glyphicon-eye-open"> </i>@item.View</span>
+                            <span class="state date">@item.PublishDate</span>
+                        </a>
+                    </h4>
+                    <p>@item.Description</p>
+                    <div class="a-btn"> 
+                        <a href="#">
+                            ادامه مطلب
+                        </a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        }
+    </div>

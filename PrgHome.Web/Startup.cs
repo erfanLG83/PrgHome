@@ -17,6 +17,7 @@ using PrgHome.DataLayer.IdentityClasses;
 using PrgHome.DataLayer.IdentityServices;
 using PrgHome.DataLayer.UnitOfWork;
 using PrgHome.Web.Classes;
+using PrgHome.Web.Models;
 using PrgHome.Web.Services;
 
 namespace PrgHome.Web
@@ -53,8 +54,10 @@ namespace PrgHome.Web
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFileWorker, FileWorker>();
             services.AddScoped<AppIdentityErrorDescriber>();
-            services.AddScoped<IAppRoleManager, AppRoleManager>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<IAppUserManager, AppUserManager>();
             services.AddScoped<IAppUserManager,AppUserManager>();
+            services.AddScoped<ConvertDate>();
             services.AddSingleton<HtmlEncoder>(
                 HtmlEncoder.Create(allowedRanges: new[] {
                     UnicodeRanges.BasicLatin,

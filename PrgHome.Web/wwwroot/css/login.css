@@ -1,0 +1,161 @@
+input[type="text"],
+input[type="password"],
+button {
+    width: 100%;
+    padding: 10px 24px;
+    background: #e6e6e6;
+    color: #696969;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+}
+
+.lgoin-container {
+    max-width: 320px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 24px;
+    padding-bottom: 12px;
+    border-radius: 25px;
+    box-shadow: 0 12px 15px 0 rgb(0 0 0 / 25%), 0 17px 50px 0 rgb(0 0 0 / 19%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 4px 0;
+    border-bottom: 2px solid #c516d8;
+    margin-bottom: 20px;
+}
+
+.Welcome-massage {
+    text-align: center;
+    font: size 0.9em;
+    margin-bottom: 20px;
+    color: #696969b0;
+    line-height: 18px;
+}
+
+.from-control {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.from-control i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    transition: color 0.3s;
+}
+
+.from-control input {
+    padding-left: 36px;
+    letter-spacing: 0.5px;
+    font-size: 1em;
+}
+
+.from-control input:focus~i {
+    color: #c516d8;
+}
+
+.from-control input:focus {
+    animation: shadow 0.5s;
+}
+
+@keyframes shadow {
+    0%,
+    100% {
+        box-shadow: none;
+    }
+    50% {
+        box-shadow: 0 0 20px 0 rgba(197, 22, 246, 0.2)
+    }
+}
+
+.forgot-password {
+    position: absolute;
+    right: 0px;
+    top: 120%;
+    font-size: 0.75em;
+    cursor: pointer;
+}
+
+button.submit {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 32px auto;
+    cursor: pointer;
+    color: #fff;
+    background-image: linear-gradient(to right, #d24ae4, #15cae1, #d24ae4);
+    background-size: 300% 100%;
+    transition: background-position 0.8s;
+}
+
+button.submit:hover {
+    background-position: 100% 0;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    ;
+}
+
+.social-login label {
+    color: #696969b0;
+    font-size: 0.9em;
+}
+
+.social-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-login button {
+    cursor: pointer;
+    width: 32px;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+    border: 1px solid #69696950;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.social-login button:nth-child(1) {
+    color: #3b5999;
+}
+
+.social-login button:nth-child(2) {
+    color: #dd4b39;
+}
+
+.social-login button:nth-child(3) {
+    color: #0077b5;
+}
+
+.additional-action p {
+    margin: auto;
+    color: #696969b0;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.additional-action p:hover {
+    color: #c516d8;
+}

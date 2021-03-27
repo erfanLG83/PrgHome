@@ -1,0 +1,80 @@
+.icon-style1 {
+    color: rgb(18, 168, 228);
+    font-size: 25px;
+}
+
+.icon-style2 {
+    color: rgb(255, 29, 206);
+    font-size: 25px;
+}
+
+.icon-style3 {
+    color: rgb(255, 52, 52);
+    font-size: 25px;
+}
+
+h6 {
+    line-height: 160%;
+}
+
+.footer {
+    background-color: #252525;
+}
+
+.hamkari {
+    background-color: lightgreen;
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: brown;
+    padding: 3%;
+}
+.d-flex{
+    display:flex !important;
+    justify-content:center;
+    align-content:center;
+}
+.d-flex.justify-content-between{
+    justify-content:space-between;
+}
+.might-top > .a-btn {
+    margin-top: 2rem !important;
+}
+.state-container {
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    flex-wrap: wrap;
+}
+.state {
+    color: #b1b1b1;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+}
+.state i{
+    font-size:14px;
+}
+.ml-1{
+    margin-left:1rem;
+}
+.might-top > .a-btn > a{
+    float:left;
+}
+.content-container img{
+    max-width:100%;
+}
+.content-container *{
+    white-space:pre-wrap;
+    overflow-wrap:break-word;
+}
+@media only screen and (max-width: 992px) {
+    .about-tre> .panel {
+        width: 50%;
+        float: right;
+    }
+}
+@media only screen and (max-width: 580px) {
+    .about-tre>.panel{
+        width:100%;
+    }
+}

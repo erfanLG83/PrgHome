@@ -1,0 +1,19 @@
+﻿@inject IArticleRepository articleRep
+@{ 
+    var categories = await articleRep.GetCategoriesAsync();
+}
+<div class="abt-2">
+    <h3>دسته بندی ها</h3>
+    <ul>
+        @foreach (var item in categories)
+        {
+
+            <li>
+                <a href="single.html">
+                    <b class="ml-1">@item.CategoryTitle</b>
+                    <span class="badge">@item.ArticleCount</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
