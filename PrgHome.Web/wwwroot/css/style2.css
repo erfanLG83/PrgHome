@@ -63,9 +63,68 @@ h6 {
 .content-container img{
     max-width:100%;
 }
-.content-container *{
+.content-container * , p{
     white-space:pre-wrap;
     overflow-wrap:break-word;
+}
+.content-container blockquote {
+    border-right: 4px solid #ababab;
+}
+img.article-img{
+    max-width:100%;
+    max-height:300px;
+    width:auto;
+    height:auto;
+}
+#article-id {
+    font-weight: 700;
+    color: rgba(51,65,85,1);
+    font-size: 2.25rem;
+}
+#article-img-container {
+    width: 100%;
+    padding: 15px;
+}
+.blog-ic > li {
+    height: 25px;
+    border: 1px solid #bfbfbf;
+    background: #e6e6e6;
+    border-radius: 20px;
+    padding: 2px 9px;
+    box-shadow: 1px 1px 2px #888;
+    margin-top:7px;
+}
+.blog-ic > li > span >i{
+    font-size:11px;
+}
+.mt-20{
+    margin-top:20px
+}
+.space-evenly {
+    justify-content: space-evenly !important;
+}
+.might-top .state-container{
+    width:max-content;
+}
+.might-top .state-container .state{
+    margin-left:20px;
+}
+.pagination li a.active {
+    background: #00bcd4;
+    color: #eee;
+}
+.title-bordered {
+    border-right: 3px solid #e91e63;
+    padding-right: 7px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #4a4a4a;
+}
+.mb-4{
+    margin-bottom:1.5rem;
+}
+hr {
+    border-top: 1px solid #dadada;
 }
 @media only screen and (max-width: 992px) {
     .about-tre> .panel {

@@ -11,7 +11,7 @@
         @if (Model.SelectedIndex > 1)
         {
             <li>
-                <a href="@(Model.GetUrl(Model.SelectedIndex - 1))" class="prev fas fa-arrow-right"></a>
+                <a href="@(Model.GetUrl(Model.SelectedIndex - 1))" class="prev fas fa-arrow-right">@Html.Raw(Model.PreviousText)</a>
             </li>
         }
         @for (int j= 0 ; j < max && i<=Model.PageCount; j++ , i++)
@@ -23,7 +23,7 @@
         @if (Model.SelectedIndex < Model.PageCount)
         {
             <li>
-                <a href="@(Model.GetUrl(Model.SelectedIndex+1))" class="next fas fa-arrow-left"></a>
+                <a href="@(Model.GetUrl(Model.SelectedIndex+1))" class="next fas fa-arrow-left">@Html.Raw(Model.NextText)</a>
             </li>
         }
     </ul>

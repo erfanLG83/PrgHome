@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PrgHome.Web.Classes;
 using PrgHome.Web.Models;
 
 namespace PrgHome.Web.Controllers
@@ -21,6 +22,8 @@ namespace PrgHome.Web.Controllers
 
         public IActionResult Index()
         {
+            Pagination pagination = new Pagination(Url, 5, 2, 5, "/articles/category/test");
+            string s = pagination.GetUrl(1);
             return View();
         }
 

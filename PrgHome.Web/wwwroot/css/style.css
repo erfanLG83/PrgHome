@@ -4,25 +4,31 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
-
 @font-face {
-    font-family: "Yekan";
-    src: url("../fonts/W_YEKAN_0.TTF");
-    src: local( "?"), url("../fonts/W_YEKAN_0.TTF")format( "truetype");
+    font-family: Vazir;
+    src: url('../fonts/Font Vazir v10.0.0/Vazir.eot');
+    src: url('../fonts/Font Vazir v10.0.0/Vazir.eot?#iefix') format('embedded-opentype'), url('../fonts/Font Vazir v10.0.0/Vazir.woff') format('woff'), url('../fonts/Font Vazir v10.0.0/Vazir.ttf') format('truetype');
+    font-weight: normal;
 }
-
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/Font Vazir v10.0.0/Vazir-Bold.eot');
+    src: url('../fonts/Font Vazir v10.0.0/Vazir-Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/Font Vazir v10.0.0/Vazir-Bold.woff') format('woff'), url('../fonts/Font Vazir v10.0.0/Vazir-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: Vazir;
+    src: url('../fonts/Font Vazir v10.0.0/Vazir-Light.eot');
+    src: url('../fonts/Font Vazir v10.0.0/Vazir-Light.eot?#iefix') format('embedded-opentype'), url('../fonts/Font Vazir v10.0.0/Vazir-Light.woff') format('woff'), url('../fonts/Font Vazir v10.0.0/Vazir-Light.ttf') format('truetype');
+    font-weight: 300;
+}
 * {
-    font-family: Yekan;
+    font-family: Vazir;
     font-size: 16px;
 }
 
 @font-face {
-    font-family: 'RobotoSlab-Regular';
-    src: url(../fonts/RobotoSlab-Regular.ttf) format('truetype');
-}
-
-@font-face {
-    font-family: 'Raleway-Regular';
+    font-family: Vazir;
     src: url(../fonts/Raleway-Regular.ttf) format('truetype');
 }
 
@@ -221,7 +227,7 @@ ul.navig li a.active {
     color: rgba(0, 0, 0, 0.74);
     font-size: 0.875em;
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .search-bar input[type="submit"] {
@@ -328,7 +334,7 @@ ul.navig li a.active {
     padding-bottom: 2px;
     width: 28%;
     margin: 0 auto;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .banner-text h1 {
@@ -351,7 +357,7 @@ ul.navig li a.active {
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .banner-btn a:hover {
@@ -385,7 +391,7 @@ ul.navig li a.active {
     border-bottom: 1px solid #999;
     width: 13%;
     margin: 0 auto;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .about-one h3 {
@@ -409,7 +415,7 @@ ul.navig li a.active {
 
 .about-two p {
     font-size: 14px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     color: #999;
     line-height: 1.8em;
     margin-top: 2%;
@@ -484,7 +490,7 @@ ul.navig li a.active {
     font-size: 13px;
     border-bottom: 1px solid #999;
     width: 26%;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     margin: 6% 0 0 0;
 }
 
@@ -500,7 +506,7 @@ ul.navig li a.active {
 
 .abt-right p {
     font-size: 14px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     color: #999;
     line-height: 1.8em;
     margin-top: 4%;
@@ -517,12 +523,12 @@ ul.navig li a.active {
 .abt-right label{
     float: left;
     font-size: 13px;
-    font-family: 'Raleway-Regular';
+    font-family: Vazir;
     color: #999;
     margin-top: 4%;
 }
 .date {
-    font-family: 'Raleway-Regular';
+    font-family: Vazir;
 }
 .abt-2 {
     margin-top: 12%;
@@ -559,12 +565,12 @@ ul.navig li a.active {
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .news form input[type="submit"] {
     background: #190608;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     padding: 8px 1em;
     color: #fff;
     font-size: 14px;
@@ -606,7 +612,7 @@ ul.navig li a.active {
     font-size: 15px;
     font-weight:500;
     color: #999;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .abt-2 ul li a:hover {
@@ -628,7 +634,7 @@ ul.navig li a.active {
     font-size: 13px;
     color: #999;
     line-height: 1.8em;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     margin-top: 4%;
 }
 
@@ -656,7 +662,7 @@ ul.navig li a.active {
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .about-btn a:hover,
@@ -697,7 +703,7 @@ ul.navig li a.active {
 
 .abt-one p {
     font-size: 13px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     color: #999;
     line-height: 1.8em;
     margin: 3% auto 0;
@@ -726,7 +732,7 @@ ul.navig li a.active {
     -moz-border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 
@@ -931,7 +937,7 @@ ul.navig li a.active {
     font-weight: 500;
     margin: 20px 0 0 0px;
     border: none;
-    font-family: 'Yekan', 'Lato', sans-serif;
+    font-family: Vazir, 'Lato', sans-serif;
     outline: none;
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -963,7 +969,7 @@ ul.navig li a.active {
 
 .contact-right p {
     font-size: 14px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     color: #999;
     line-height: 1.8em;
     margin-top: 2%;
@@ -1096,14 +1102,14 @@ h3.ghj {
     color: rgba(255, 255, 255, 0.9);
     text-align: center;
     font-size: 14px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
 }
 
 .da-thumbs li a div h5 {
     color: #FFF;
     font-size: 1.5em;
     margin: 3.5em 0 0 0;
-    font-family: 'Yekan', 'Audiowide-Regular';
+    font-family: Vazir, 'Audiowide-Regular';
     text-align: center;
 }
 
@@ -1124,7 +1130,7 @@ h3.ghj {
 
 .welcome-bottom p {
     font-size: 14px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     color: #999;
     line-height: 1.8em;
     margin: 1% auto;
@@ -1175,7 +1181,7 @@ h3.ghj {
 
 .team-right p {
     font-size: 14px;
-    font-family: 'Yekan', 'Raleway-Regular';
+    font-family: Vazir, Vazir;
     color: #999;
     line-height: 1.8em;
     margin-top: 2%;
@@ -1204,7 +1210,7 @@ h3.ghj {
 
 .single-grid p {
     font-size: 14px;
-    font-family: 'Raleway-Regular';
+    font-family: Vazir;
     color: #999;
     line-height: 1.8em;
     margin-top: 1.5%;
@@ -1224,8 +1230,9 @@ i.glyphicon {
 
 ul.blog-ic li span {
     font-size: 14px;
-    font-family: 'Raleway-Regular';
-    color: #999;
+    font-weight: 700;
+    font-family: Vazir;
+    color: rgba(100,116,139,0.8);
 }
 
 ul.blog-ic li a:hover {
@@ -1248,7 +1255,7 @@ h4.media-heading {
 
 .media-body p {
     font-size: 14px;
-    font-family: 'Raleway-Regular';
+    font-family: Vazir;
     color: #999;
     line-height: 1.8em;
 }
@@ -1290,6 +1297,8 @@ ul.blog-ic li {
 }
 
 ul.blog-ic {
+    display: inline;
+    color: rgba(100,116,139,1);
     margin-top: 10px;
 }
 

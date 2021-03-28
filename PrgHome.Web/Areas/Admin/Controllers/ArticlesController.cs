@@ -29,7 +29,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             int count = 0;
             var articles = Pagination.GetData<Article>(await _articleRep.FindAllAsync(false), ref count, row, index);
             int pageCount = count % row == 0 ? count / row : (count / row) + 1;
-            ViewBag.PaginationModel = new Pagination(Url, pageCount, index, row, "Index", "Articles", "");
+            ViewBag.PaginationModel = new Pagination(Url, pageCount, index, row,action: "Index",controller: "Articles", "");
             int rowCounter = row * (index - 1);
             articles = await _articleRep.GetAllReferencePropertyAsync(articles, m => m.Category);
             var model = articles.Select(n => new ArticleViewModel
@@ -96,7 +96,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             }
             await _articleRep.CreateAsync(createArticle);
             await _unitOfWork.Commit();
-            Popup.PopupModel = new Popup("افزودن مقاله", $"افزودن مقاله با عنوان <b> {article.Title} </b> با موفقیت انجام شد", IconType.Success);
+            Popup.PopupModel = new Popup("افزودن مقاله", $"افزودن مقاله با عنوان {article.Title} با موفقیت انجام شد", IconType.Success);
             return RedirectToAction("Index");
         }
 
@@ -171,9 +171,9 @@ namespace PrgHome.Web.Areas.Admin.Controllers
                 return NotFound();
             }
             ArticleDetailsViewModel model = new ArticleDetailsViewModel(article);
-            if (!article.CategoryId.HasValue)
+            if (article.CategoryId.HasValue)
             {
-                var category = await _unitOfWork._context.Categories.FindAsync(id);
+                var category = await _unitOfWork._context.Categories.FindAsync(article.CategoryId);
                 model.CategoryTitle = category.Title;
             }
             model.CommentCount = _unitOfWork._context.Comments.Count(n => n.ArticleId == id);

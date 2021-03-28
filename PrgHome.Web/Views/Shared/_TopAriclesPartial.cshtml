@@ -8,19 +8,21 @@
         {
             <div class="might-grid">
                 <div class="grid-might">
-                    <a href="#"><img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive" alt=""> </a>
+                    <a href="/articles/show/@item.Title"><img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive" alt=""> </a>
                 </div>
                 <div class="might-top">
                     <h4>
-                        <a class="state-container" href="single.html">
+                        <a href="/articles/show/@item.Title">
                             @item.Title
-                            <span class="state"><i class="glyphicon glyphicon-eye-open"> </i>@item.View</span>
-                            <span class="state date">@item.PublishDate</span>
                         </a>
                     </h4>
+                    <div  class="state-container space-evenly mt-20">
+                        <span class="state"><i class="glyphicon glyphicon-eye-open"> </i>@item.View</span>
+                        <span class="state date">@item.PublishDate</span>
+                    </div>
                     <p>@item.Description</p>
                     <div class="a-btn"> 
-                        <a href="#">
+                        <a href="/articles/show/@item.Title">
                             ادامه مطلب
                         </a>
                     </div>

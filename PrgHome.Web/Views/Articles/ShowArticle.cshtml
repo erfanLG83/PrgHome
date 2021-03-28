@@ -1,57 +1,71 @@
 ﻿@model ShowArticleViewModel
-<div class="about-two">
-    <a href="#"><img src="@Model.Image" alt="@Model.Title"></a>
-    <h3></h3>
-    <div class="content-container">
-        @Html.Raw(Model.Content)
-    </div>
-    <div class="Comments-articles mb-3 mt-5 shadow p-3 rounded-3 ">
-        <div class="comment-article-titl mb-4 ">
-            <p>
-                <i class="bi bi-chat-right-text "></i> نظرات خود را با ما به اشتراک بگذارید
-            </p>
+    <div class="about-two">
+        <ol class="breadcrumb">
+            <li><a href="/">خانه</a></li>
+            <li><a href="/articles/category/@Model.CategoryTitle">@Model.CategoryTitle</a></li>
+            <li class="active"><a href="#">@Model.Title</a></li>
+        </ol>
+        <h2 id="article-title">
+            @Model.Title
+            <ul class="blog-ic pull-left">
+                <li><span>زمان مطالعه @Model.TimeToRead دقیقه</span></li>
+                <li><span><i class="glyphicon glyphicon-time"> </i>@Model.Date</span></li>
+                <li><span><i class="glyphicon glyphicon-eye-open"> </i>@Model.View</span></li>
+            </ul>
+        </h2>
+        <section id="article-img-container" class="d-flex">
+            <a href="#"><img src="@Model.Image" class="article-img" alt="@Model.Title"></a>
+        </section>
+        <div class="content-container">
+            @Html.Raw(Model.Content)
         </div>
-        <div class="mb-3 ">
-            <label for="name">نام</label>
-            <input type="text " class="form-control " id="name" placeholder="نام خود را وارد کنید">
-        </div>
-        <div class="mb-3 ">
-            <label for="email">ایمیل(اختیاری)</label>
-            <input type="text " class="form-control " id="email " placeholder="ایمیل خود را وارد کنید ">
-        </div>
-        <div class="mb-3">
-            <label for="comment_text">کامنت</label>
-            <textarea class="form-control " placeholder="نظر خود را وارد کنید" id="comment_text " style="height: 100px "></textarea>
-        </div>
-        <button type="submit " class="btn btn-block btn-primary mt-4 w-25 ">ثبت نظر</button>
-        <div class="containers-comment ">
-            <div class="alert border mt-4 comment-box " role="alert ">
-                <h4 class="alert-heading name-person-comment ">
-                    فرهاد عارفی
-                    <i class="bi bi-person-fill "></i>
-                    <span class="h6 "> نوشته شده در تاریخ 1/1/99 </span>
-                    <button class="btn btn-success btn-sm response-btn "> پاسخ</button>
-                </h4>
-                <p> بسیار مقاله کاربردی بود </p>
-                <div class="response-comment border-top pt-2 ">
-                    <h4 class="alert-heading ">
-                        رضا رابری
+        <div class="Comments-articles mb-3 mt-5 shadow p-3 rounded-3 ">
+            <div class="comment-article-titl mb-4 ">
+                <p>
+                    <i class="bi bi-chat-right-text "></i> نظرات خود را با ما به اشتراک بگذارید
+                </p>
+            </div>
+            <div class="mb-3 ">
+                <label for="name">نام</label>
+                <input type="text" class="form-control " id="name" placeholder="نام خود را وارد کنید">
+            </div>
+            <div class="mb-3 ">
+                <label for="email">ایمیل(اختیاری)</label>
+                <input type="text" class="form-control " id="email " placeholder="ایمیل خود را وارد کنید ">
+            </div>
+            <div class="mb-3">
+                <label for="comment_text">کامنت</label>
+                <textarea class="form-control " placeholder="نظر خود را وارد کنید" id="comment_text " style="height: 100px "></textarea>
+            </div>
+            <button type="submit " class="btn btn-block btn-primary mt-4 w-25 ">ثبت نظر</button>
+            <div class="containers-comment ">
+                <div class="alert border mt-4 comment-box " role="alert ">
+                    <h4 class="alert-heading name-person-comment ">
+                        فرهاد عارفی
                         <i class="bi bi-person-fill "></i>
                         <span class="h6 "> نوشته شده در تاریخ 1/1/99 </span>
+                        <button class="btn btn-success btn-sm response-btn "> پاسخ</button>
                     </h4>
-                    <p class="mr-3 ">درسته آقای عارفی</p>
+                    <p> بسیار مقاله کاربردی بود </p>
+                    <div class="response-comment border-top pt-2 ">
+                        <h4 class="alert-heading ">
+                            رضا رابری
+                            <i class="bi bi-person-fill "></i>
+                            <span class="h6 "> نوشته شده در تاریخ 1/1/99 </span>
+                        </h4>
+                        <p class="mr-3 ">درسته آقای عارفی</p>
 
+                    </div>
                 </div>
-            </div>
-            <div class="alert border mt-4 comment-box " role="alert ">
-                <h4 class="alert-heading name-person-comment ">
-                    فرهاد عارفی
-                    <i class="bi bi-person-fill "></i>
-                    <span class="h6 "> نوشته شده در تاریخ 1/1/99 </span>
-                    <button class="btn btn-success btn-sm response-btn "> پاسخ</button>
-                </h4>
-                <p> بسیار مقاله کاربردی بود </p>
+                <div class="alert border mt-4 comment-box " role="alert ">
+                    <h4 class="alert-heading name-person-comment ">
+                        فرهاد عارفی
+                        <i class="bi bi-person-fill "></i>
+                        <span class="h6 "> نوشته شده در تاریخ 1/1/99 </span>
+                        <button class="btn btn-success btn-sm response-btn "> پاسخ</button>
+                    </h4>
+                    <p> بسیار مقاله کاربردی بود </p>
+                </div>
             </div>
         </div>
     </div>
-</div>

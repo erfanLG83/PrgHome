@@ -8,7 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 
 <head>
-    <title>پروگرمر هوم - صفحه اصلی</title>
+    <title>خانه برنامه نویسان @ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="keywords" content="">
@@ -27,7 +27,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           type="image/x-icon">
     <link href="~/css/style.css" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="~/css/style2.css">
-    @await RenderSectionAsync("Links",false);
+    @await RenderSectionAsync("Links",false)
     <script src="~/js/jquery.min.js"></script>
     <!---- start-smoth-scrolling---->
     <script type="text/javascript" src="~/js/move-top.js"></script>
@@ -65,10 +65,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">آرشیو</a></li>
+                        <li><a href="articles">آرشیو</a></li>
                         <partial name="_CategoriesNavbarPartail"/>
-                        <li><a href="#"> درباره ما</a></li>
-                        <li><a href="#">تماس با ما</a></li>
+                        <li><a href="/aboutus"> درباره ما</a></li>
+                        <li><a href="/contactus">تماس با ما</a></li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
@@ -80,14 +80,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div><!-- /.container-fluid -->
         </nav>
     </div>
-    <!-- script-for-menu -->
-            <!-- script-for-menu -->
-            <script>
-                $("span.menu").click(function () {
-                    $(" ul.navig").slideToggle("slow", function () { });
-                });
-            </script>
-            <!-- script-for-menu -->
             <!--about-starts-->
             <div class="about">
                 <div class="container">
@@ -98,14 +90,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <div class="col-md-4 about-left heading">
                             <partial name="_TopAriclesPartial" />
                             <partial name="_CategoriesPartial" />
-                            <partial name="_LastArticlesPartial" />
+                            @if (ViewData["last_articles"] == null || (bool)ViewData["last_articles"]==true)
+                            {
+                                <partial name="_LastArticlesPartial" />
+                            }
                             <div class="abt-2">
                                 <h3>
                                     خبر نامه
                                 </h3>
                                 <div class="news">
                                     <form>
-                                        <input type="text" value="ایمیل" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />
+                                        <input type="text" value="ایمیل" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ایمیل';}" />
                                         <input type="submit" value="مشترک شدن">
                                     </form>
                                 </div>

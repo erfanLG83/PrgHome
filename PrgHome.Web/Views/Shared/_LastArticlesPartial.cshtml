@@ -10,7 +10,7 @@
         {
 
             <div class="col-md-12 panel panel-default abt-right">
-                <h3 class="article-title panel-heading"><a href="single.html">@item.Title</a></h3>
+                <h3 class="article-title panel-heading"><a href="/articles/show/@item.Title">@item.Title</a></h3>
                 <div class="panel-body">
                     <a href="#">
                         <img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive" alt="">
@@ -20,7 +20,7 @@
                     </p>
 
                     <div class="a-btn">
-                        <a href="#">
+                        <a href="/articles/show/@item.Title">
                             ادامه مطلب
                         </a>
                     </div>

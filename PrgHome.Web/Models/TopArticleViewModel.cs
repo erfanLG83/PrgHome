@@ -11,6 +11,8 @@ namespace PrgHome.Web.Models
         public string Description { get; set; }
         public string Image { get; set; }
         public string PublishDate { get; set; }
+        public string CategoryTitle { get; set; }
+        public int TimeToRead { get; set; }
         public int View { get; set; }
     }
 }

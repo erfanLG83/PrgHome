@@ -7,7 +7,10 @@
     <ul class="dropdown-menu">
         @foreach (var item in categories)
         {
-            <li><a class="d-flex justify-content-between" href="#">@item.CategoryTitle <span class="badge">@item.ArticleCount</span></a></li>
+            <li>
+                <a class="d-flex justify-content-between" href="/articles/category/@item.CategoryTitle">
+                @item.CategoryTitle <span class="badge">@item.ArticleCount</span>
+            </a></li>
         }
     </ul>
 </li>

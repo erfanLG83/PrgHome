@@ -25,7 +25,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             int count = 0;
             var categories = Pagination.GetData<Category>(await _categoryRep.FindAllAsync(),ref count,row,index);
             int pageCount = count % row == 0 ? count / row : (count / row) + 1;
-            ViewBag.PaginationModel = new Pagination(Url,pageCount,index,row,"Index","Categories","");
+            ViewBag.PaginationModel = new Pagination(Url,pageCount,index,row,action: "Index",controller: "Categories","");
             int rowCounter = row * (index-1);
             return View(
                 categories.Select(n => new CategoryViewModel
