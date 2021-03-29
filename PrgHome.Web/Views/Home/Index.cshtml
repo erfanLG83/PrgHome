@@ -1,5 +1,36 @@
-﻿@{ 
+﻿@model IEnumerable<TopArticleViewModel>
+@{
     ViewData["last_articles"] = false;
 }
 <h2 class="title-bordered mb-4">اخرین مقالات منتشر شده</h2>
 
+
+@foreach (var item in Model)
+{
+
+    <div class="about-two">
+        <h3>
+            @item.Title
+
+            <ul class="blog-ic pull-left">
+                <li><span><i class="glyphicon glyphicon-time"> </i>@item.PublishDate</span></li>
+                <li><span><i class="glyphicon glyphicon-eye-open"> </i>@item.View</span></li>
+                <li><span> زمان مطالعه (@item.TimeToRead دقیقه)</span></li>
+                <li><span><i class="glyphicon glyphicon-list"> </i>@item.CategoryTitle</span></li>
+            </ul>
+        </h3>
+        <div class="d-flex" id="article-img-container">
+            <a href="/articles/show/@item.Title"><img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive article-img" alt="@item.Title"></a>
+        </div>
+        <p>
+            @item.Description
+        </p>
+        <p>
+            <div class="about-btn">
+                <a href="/articles/show/@item.Title">
+                    ادامه مطلب
+                </a>
+            </div>
+    </div>
+    <hr />
+}

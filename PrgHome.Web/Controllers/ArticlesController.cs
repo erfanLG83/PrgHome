@@ -24,7 +24,7 @@ namespace PrgHome.Web.Controllers
             _articleRep = _uow.GetRepository<Article>();
             _categoryRep = _uow.GetRepository<Category>();
         }
-        [Route("{Contoller}")]
+        [Route("articles")]
         public async Task<IActionResult> Index(int row =5,int index =1)
         {
 
@@ -57,6 +57,11 @@ namespace PrgHome.Web.Controllers
             }
             article = await _articleRep.GetReferencePropertyAsync(article, n => n.Category);
             ShowArticleViewModel model = new ShowArticleViewModel(article);
+            #region Update View
+            article.View++;
+            _articleRep.Update(article);
+            await _uow.Commit();
+            #endregion
             return View(model);
         }
         [Route("articles/category/{title}")]
@@ -75,7 +80,9 @@ namespace PrgHome.Web.Controllers
                 Image = n.Image,
                 PublishDate = _convert.ConvertMiladiToShamsi(n.PublishDate.Value, "yyyy/MM/dd"),
                 Title = n.Title,
-                View = n.View
+                View = n.View,
+                CategoryTitle = title,
+                TimeToRead = n.TimeToRead.Value
             });
             int count = 0;
             model = Pagination.GetData<TopArticleViewModel>(model,ref count, row, index);
@@ -83,6 +90,39 @@ namespace PrgHome.Web.Controllers
             ViewBag.Pagination = new Pagination(count, index, row ,"/articles/category/"+title, "&raquo;", "&laquo");
             ViewBag.CategoryTitle = category.Title;
             return View(model);
+        }
+        [Route("search")]
+        public async Task<IActionResult> Search(string q , int row =5 , int index= 1)
+        {
+            if (string.IsNullOrEmpty(q))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var list = await _articleRep.FindByConditionAsync(n=>n.IsPublish);
+            list = await _articleRep.GetAllReferencePropertyAsync(list, n => n.Category);
+            string qUppred = q.ToUpper();
+            var model = list.Where(n=>
+                n.Tags.ToUpper().Contains(qUppred) 
+                || n.Title.ToUpper().Contains(qUppred) 
+                || n.Description.ToUpper().Contains(qUppred) 
+                || n.Category.Title.ToUpper().Contains(qUppred)
+                ).Select(n => new TopArticleViewModel
+            {
+                CategoryTitle = n.Category.Title,
+                Description = n.Description,
+                Image = n.Image,
+                PublishDate = _convert.ConvertMiladiToShamsi(n.PublishDate.Value,"yyyy/MM/dd"),
+                TimeToRead=n.TimeToRead.Value,
+                Title = n.Title,
+                View = n.View
+            });
+            int count = 0;
+            model = Pagination.GetData<TopArticleViewModel>(model, ref count, row, index);
+            count = count % row == 0 ? count / row : (count / row) + 1;
+            ViewBag.Query = q;
+            ViewBag.Pagination = new Pagination(count, index, row, "/search?q="+q, "&raquo;", "&laquo");
+            return View(model);
+
         }
     }
 }

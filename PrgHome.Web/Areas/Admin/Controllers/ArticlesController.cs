@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PrgHome.DataLayer.Models;
@@ -13,6 +14,7 @@ using PrgHome.Web.Services;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles ="مدیر")]
     public class ArticlesController : Controller
     {
         IUnitOfWork _unitOfWork;
@@ -97,7 +99,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             await _articleRep.CreateAsync(createArticle);
             await _unitOfWork.Commit();
             Popup.PopupModel = new Popup("افزودن مقاله", $"افزودن مقاله با عنوان {article.Title} با موفقیت انجام شد", IconType.Success);
-            return RedirectToAction("Index");
+            return Redirect("/admin/articles");
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -161,7 +163,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             editArticle.Description = article.Description;
             _articleRep.Update(editArticle);
             await _unitOfWork.Commit();
-            return RedirectToAction("Index");
+            return Redirect("/admin/articles");
         }
         public async Task<IActionResult> Details(int id)
         {
@@ -203,7 +205,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             _articleRep.Delete(article);
             await _unitOfWork.Commit();
             Popup.PopupModel = new Popup("حذف مقاله", $"حذف مقاله با عنوان {article.Title} با موفقیت انجام شد", IconType.Success);
-            return RedirectToAction(nameof(Index));
+            return Redirect("/admin/articles");
         }
     }
 }

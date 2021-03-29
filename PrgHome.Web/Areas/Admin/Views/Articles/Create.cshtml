@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tom-select@1.1/dist/css/tom-select.css" rel="stylesheet">
 }
 @section Navbar{
-    <a asp-action="Index">مقالات</a>
+    <a href="/admin/articles">مقالات</a>
     <a href="#" class="active">افزودن</a>
 }
 <h2 class="text-dark">افزودن دسته بندی</h2>
@@ -53,12 +53,12 @@
 
         <textarea asp-for="Content" id="contentInput"></textarea>
 
-        <section class="form-group mt-20">
+        <section class="form-group flex-row mt-20">
             <label asp-for="FormFile">تصویر مقاله</label>
             <input asp-for="FormFile" type="file" />
         </section>
 
-        <section class="form-group mt-20 form-group-checkbox">
+        <section class="form-group  mt-20 flex-row form-group-checkbox">
             <label asp-for="IsPublish">منتشر شود ؟</label>
             <input asp-for="IsPublish" type="checkbox" />
         </section>

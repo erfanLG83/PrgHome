@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrgHome.DataLayer.IdentityClasses;
@@ -13,6 +14,8 @@ using PrgHome.Web.Models;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "مدیر")]
     public class RolesManagerController : Controller
     {
         private readonly IAppRoleManager _roleManager;

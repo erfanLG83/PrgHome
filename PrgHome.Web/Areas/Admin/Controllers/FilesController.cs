@@ -10,9 +10,12 @@ using PrgHome.DataLayer.Models;
 using PrgHome.DataLayer.Repository;
 using System.Drawing;
 using PrgHome.DataLayer.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "مدیر")]
     public class FilesController : Controller
     {
         IUnitOfWork _unitOfWork;

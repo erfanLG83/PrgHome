@@ -5,37 +5,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PrgHome.DataLayer.Models;
+using PrgHome.DataLayer.Repository;
+using PrgHome.DataLayer.UnitOfWork;
 using PrgHome.Web.Classes;
 using PrgHome.Web.Models;
+using PrgHome.Web.Services;
 
 namespace PrgHome.Web.Controllers
 {
     public class HomeController : Controller
     {
-        
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IArticleRepository _articleRepository;
+        public HomeController(IArticleRepository articleRepository)
         {
-            _logger = logger;
+            _articleRepository = articleRepository;
         }
-
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            Pagination pagination = new Pagination(Url, 5, 2, 5, "/articles/category/test");
-            string s = pagination.GetUrl(1);
-            return View();
+            var model = await _articleRepository.GetLastArticlesAsync();
+            return View(model);
         }
+        [Route("ContactUs")]
+        public IActionResult ContactUs() => View();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

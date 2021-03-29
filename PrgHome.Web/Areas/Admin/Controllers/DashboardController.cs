@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PrgHome.DataLayer.Models;
 using PrgHome.DataLayer.UnitOfWork;
@@ -9,6 +10,8 @@ using PrgHome.Web.Areas.Admin.Models;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "مدیر")]
     public class DashboardController : Controller
     {
         IUnitOfWork _unitOfWork;

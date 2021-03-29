@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PrgHome.DataLayer.IdentityClasses;
 using PrgHome.DataLayer.IdentityServices;
@@ -11,6 +12,8 @@ using PrgHome.Web.Services;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "مدیر")]
     public class UsersManagerController : Controller
     {
         private readonly IAppUserManager _userManager;
@@ -67,7 +70,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
                 }
                 else
                 {
-                    Popup.PopupModel = new Popup("افزودن کاربر", $"کاربر {user.Username} با موفقیا اضافه شد.", IconType.Success);
+                    Popup.PopupModel = new Popup("افزودن کاربر", $"کاربر {user.Username} با موفقیت اضافه شد.", IconType.Success);
                     if (!string.IsNullOrEmpty(user.UserRoles))
                     {
                         result = await _userManager.AddToRolesAsync(createUser, user.UserRoles.Split(','));

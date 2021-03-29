@@ -17,7 +17,6 @@
                     <th>#</th>
                     <th>عنوان دسته</th>
                     <th>تعداد مقالات</th>
-                    <th>عملیات</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,11 +26,6 @@
                         <td>12</td>
                         <td>@item.Title</td>
                         <td>@item.ArticleCount</td>
-                        <td class="d-flex">
-                            <a class="btn btn-primary btn-sm" href="#">جزئیات</a>
-                            <a class="btn btn-warning btn-sm margin-rl-10" href="#">ویرایش</a>
-                            <a class="btn btn-danger btn-sm" href="#">حذف</a>
-                        </td>
                     </tr>
                 }
             </tbody>
@@ -40,7 +34,7 @@
     <a class="btn btn-primary mt-20 animate__animated animate__zoomIn animate__delay-1s  btn-center" asp-action="Index" asp-area="Admin" asp-controller="Categories">بیشتر ...</a>
 </section>
 <section class="margin-20">
-    <h2 class="table-title animate__animated animate__fadeIn animate__delay-2s">کاربران</h2>
+    <h2 class="table-title animate__animated animate__fadeIn animate__delay-2s">مقالات</h2>
     <section class="table-container">
 
         <table class="table animate__animated animate__zoomIn animate__delay-2s ">
@@ -53,7 +47,6 @@
                     <th>بازدیدها</th>
                     <th>تاریخ انتشار</th>
                     <th>منتشر شده؟</th>
-                    <th>عملیات</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,11 +70,6 @@
                     <td>@(item.PublishDate.HasValue ? item.PublishDate.Value.ToLongDateString() : "---")</td>
                     <td>
                         <input type="checkbox" @(item.IsPublish ? "checked" : "") disabled />
-                    </td>
-                    <td class="d-flex">
-                        <a class="btn btn-primary btn-sm" href="#">جزئیات</a>
-                        <a class="btn btn-warning btn-sm margin-rl-10" href="#">ویرایش</a>
-                        <a class="btn btn-danger btn-sm" href="#">حذف</a>
                     </td>
                 </tr>
                 }

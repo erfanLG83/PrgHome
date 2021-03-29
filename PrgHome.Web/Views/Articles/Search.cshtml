@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<TopArticleViewModel>
 @{
-    ViewData["Title"] = ViewBag.CategoryTitle;
+    ViewData["Title"] = $" - جستجوی {ViewBag.Query}";
 }
 
-<ol class="breadcrumb">
-    <li><a href="/">خانه</a></li>
-    <li><a href="/articles/category/@ViewBag.CategoryTitle">@ViewBag.CategoryTitle</a></li>
-</ol>
+    <ol class="breadcrumb">
+        <li><a href="/">خانه</a></li>
+        <li><a href="/articles">مقالات</a></li>
+        <li><a href="/articles">جستجوی '@ViewBag.Query'</a></li>
+    </ol>
 
 @foreach (var item in Model)
 {
-
 
     <div class="about-two">
         <h3>
@@ -39,6 +39,12 @@
     <hr />
 }
 
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">
+        <p>متاسفانه نتیجه ای برای '@ViewBag.Query' پیدا نشد</p>
+    </div>
+}
 <div class="d-flex">
     <partial name="_PaginationPartial" model="ViewBag.Pagination" />
 </div>

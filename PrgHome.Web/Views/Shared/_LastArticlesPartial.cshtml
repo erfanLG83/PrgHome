@@ -12,9 +12,9 @@
             <div class="col-md-12 panel panel-default abt-right">
                 <h3 class="article-title panel-heading"><a href="/articles/show/@item.Title">@item.Title</a></h3>
                 <div class="panel-body">
-                    <a href="#">
+                    <div class="d-flex article-img-container">
                         <img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive" alt="">
-                    </a>
+                    </div>
                     <p>
                         @item.Description
                     </p>

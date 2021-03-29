@@ -20,6 +20,18 @@ namespace PrgHome.Web.Models
             View = article.View;
             TimeToRead = article.TimeToRead.Value;
             Image = "/Files/" + article.Image;
+            if (string.IsNullOrEmpty(article.Tags))
+            {
+                Tags = new List<string>();
+            }
+            else
+            {
+                Tags = article.Tags.Split(',').ToList();
+                for (int i = 0; i < Tags.Count; i++)
+                {
+                    Tags[i] = Tags[i].Replace(' ', '_');
+                }
+            }
         }
         public int Id { get; set; }
         public string Title { get; set; }
@@ -29,5 +41,6 @@ namespace PrgHome.Web.Models
         public string CategoryTitle { get; set; }
         public int View { get; set; }
         public int TimeToRead { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

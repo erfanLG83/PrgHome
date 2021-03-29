@@ -1,0 +1,48 @@
+﻿@model LoginUserDto
+@{
+    ViewData["Title"] = "ورود به سایت";
+}
+@section Links{ 
+    <link href="~/css/login.css" rel="stylesheet" />
+}
+<div class="lgoin-container">
+    <p class="title">ورود به سایت</p>
+    <p class="text-danger"><span asp-validation-for="UserName"></span></p>
+    <p class="text-danger"><span asp-validation-for="Password"></span></p>
+    <form asp-action="Login" asp-controller="Account" method="post" class="login-form">
+        <input type="hidden" asp-for="ReturnUrl"/>
+        <div asp-validation-summary="All">
+        </div>
+        <div class="from-control">
+            <input asp-for="UserName" type="text" placeholder="نام کاربری یا ایمیل">
+            <i class="fa fa-user"></i>
+        </div>
+        <div class="from-control">
+            <input asp-for="Password" type="password" placeholder="کلمه عبور">
+            <i class="fa fa-key"></i>
+            <p class="forgot-password">فراموشی کلمه عبور؟</p>
+        </div>
+        <button class="submit">ورود</button>
+    </form>
+
+    <div class="social-login">
+        <label>ورود با</label>
+        <div class="social-container">
+            <button>
+                <i class="fa fa-facebook"></i>
+            </button>
+            <button>
+                <i class="fa fa-google"></i>
+            </button>
+        </div>
+    </div>
+
+    <dic class="additional-action">
+        <a href="#"><p>اکانت ندارید ؟ ثبت نام</p></a>
+    </dic>
+
+</div>
+
+@section Scripts{ 
+    <partial name="_ValidationScriptsPartial"/>
+}

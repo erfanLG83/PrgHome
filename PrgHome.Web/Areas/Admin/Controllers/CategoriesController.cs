@@ -8,9 +8,12 @@ using PrgHome.DataLayer.Repository;
 using PrgHome.DataLayer.Models;
 using PrgHome.Web.Classes;
 using PrgHome.Web.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "مدیر")]
     public class CategoriesController : Controller
     {
         IUnitOfWork _unitOfWork;

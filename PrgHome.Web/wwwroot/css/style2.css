@@ -119,12 +119,46 @@ img.article-img{
     font-weight: 600;
     font-size: 18px;
     color: #4a4a4a;
+    display:inline-block;
 }
 .mb-4{
     margin-bottom:1.5rem;
 }
 hr {
     border-top: 1px solid #dadada;
+}
+.tags{
+    display:flex;
+    justify-content:right;
+    align-items:center;
+    flex-wrap:wrap;
+}
+p.tags > a {
+    color: #00bcd4;
+    font-size: 15px;
+    padding: 0 10px;
+}
+    p.tags > a:hover {
+        color: #8c94ea
+    }
+.article-img-container{
+    height:200px;
+}
+    .article-img-container img{
+        width:auto;
+        height:max-content;
+        max-height:200px
+
+    }
+.about-tre > .panel{
+    height:500px
+}
+.validation-summary-errors {
+    margin-bottom: 20px;
+    color: #f00;
+}
+.validation-summary-errors li{
+    font-size:14px
 }
 @media only screen and (max-width: 992px) {
     .about-tre> .panel {

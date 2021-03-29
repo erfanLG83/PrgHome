@@ -47,6 +47,11 @@ namespace PrgHome.Web
                 op.IdleTimeout = TimeSpan.FromMinutes(20);
                 op.Cookie.HttpOnly = true;
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/";
+            });
             services.AddDbContext<PrgHomeContext>(options=>
             {
                 options.UseSqlServer(@"Server=.;Database=PrgHomeDB;trusted_Connection=True");
@@ -55,7 +60,7 @@ namespace PrgHome.Web
             services.AddScoped<IFileWorker, FileWorker>();
             services.AddScoped<AppIdentityErrorDescriber>();
             services.AddScoped<IArticleRepository, ArticleRepository>();
-            services.AddScoped<IAppUserManager, AppUserManager>();
+            services.AddScoped<IAppRoleManager, AppRoleManager>();
             services.AddScoped<IAppUserManager,AppUserManager>();
             services.AddScoped<ConvertDate>();
             services.AddSingleton<HtmlEncoder>(
@@ -82,6 +87,7 @@ namespace PrgHome.Web
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
+            app.UseAuthorization();
             app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {

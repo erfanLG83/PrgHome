@@ -11,6 +11,7 @@
                 <li><span>زمان مطالعه @Model.TimeToRead دقیقه</span></li>
                 <li><span><i class="glyphicon glyphicon-time"> </i>@Model.Date</span></li>
                 <li><span><i class="glyphicon glyphicon-eye-open"> </i>@Model.View</span></li>
+                <li><span><i class="glyphicon glyphicon-list"> </i>@Model.CategoryTitle</span></li>
             </ul>
         </h2>
         <section id="article-img-container" class="d-flex">
@@ -19,6 +20,13 @@
         <div class="content-container">
             @Html.Raw(Model.Content)
         </div>
+        <p class="tags">
+            <span class="title-bordered">برچسب ها</span>
+            @foreach (var item in Model.Tags)
+            {
+                <a href="/search?q=@item">#@item</a>
+            }
+        </p>
         <div class="Comments-articles mb-3 mt-5 shadow p-3 rounded-3 ">
             <div class="comment-article-titl mb-4 ">
                 <p>

@@ -1,6 +1,6 @@
-input[type="text"],
-input[type="password"],
-button {
+.lgoin-container input[type="text"],
+.lgoin-container input[type="password"],
+.lgoin-container button {
     width: 100%;
     padding: 10px 24px;
     background: #e6e6e6;
@@ -24,7 +24,7 @@ button {
     align-items: center;
 }
 
-.title {
+.lgoin-container .title {
     text-transform: uppercase;
     font-size: 1.2em;
     font-weight: bold;
@@ -34,42 +34,42 @@ button {
     margin-bottom: 20px;
 }
 
-.Welcome-massage {
-    text-align: center;
-    font: size 0.9em;
-    margin-bottom: 20px;
-    color: #696969b0;
-    line-height: 18px;
-}
+    .lgoin-container .Welcome-massage {
+        text-align: center;
+        font: size 0.9em;
+        margin-bottom: 20px;
+        color: #696969b0;
+        line-height: 18px;
+    }
 
-.from-control {
-    width: 100%;
-    position: relative;
-    margin-bottom: 20px;
-}
+    .lgoin-container .from-control {
+        width: 100%;
+        position: relative;
+        margin-bottom: 20px;
+    }
 
-.from-control i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #888;
-    transition: color 0.3s;
-}
+        .lgoin-container .from-control i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            transition: color 0.3s;
+        }
 
-.from-control input {
-    padding-left: 36px;
-    letter-spacing: 0.5px;
-    font-size: 1em;
-}
+        .lgoin-container .from-control input {
+            padding-left: 36px;
+            letter-spacing: 0.5px;
+            font-size: 1em;
+        }
 
-.from-control input:focus~i {
-    color: #c516d8;
-}
+            .lgoin-container .from-control input:focus ~ i {
+                color: #c516d8;
+            }
 
-.from-control input:focus {
-    animation: shadow 0.5s;
-}
+            .lgoin-container .from-control input:focus {
+                animation: shadow 0.5s;
+            }
 
 @keyframes shadow {
     0%,
@@ -81,7 +81,7 @@ button {
     }
 }
 
-.forgot-password {
+.lgoin-container .forgot-password {
     position: absolute;
     right: 0px;
     top: 120%;
@@ -89,7 +89,7 @@ button {
     cursor: pointer;
 }
 
-button.submit {
+.lgoin-container button.submit {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 32px auto;
@@ -100,11 +100,11 @@ button.submit {
     transition: background-position 0.8s;
 }
 
-button.submit:hover {
+.lgoin-container button.submit:hover {
     background-position: 100% 0;
 }
 
-.social-login {
+.lgoin-container .social-login {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,18 +112,18 @@ button.submit:hover {
     ;
 }
 
-.social-login label {
-    color: #696969b0;
-    font-size: 0.9em;
-}
+    .lgoin-container .social-login label {
+        color: #696969b0;
+        font-size: 0.9em;
+    }
 
-.social-container {
+.lgoin-container .social-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.social-login button {
+.lgoin-container .social-login button {
     cursor: pointer;
     width: 32px;
     background: none;
@@ -136,19 +136,19 @@ button.submit:hover {
     border-radius: 2px;
 }
 
-.social-login button:nth-child(1) {
-    color: #3b5999;
-}
+    .lgoin-container .social-login button:nth-child(1) {
+        color: #3b5999;
+    }
 
-.social-login button:nth-child(2) {
-    color: #dd4b39;
-}
+    .lgoin-container .social-login button:nth-child(2) {
+        color: #dd4b39;
+    }
 
-.social-login button:nth-child(3) {
-    color: #0077b5;
-}
+    .lgoin-container .social-login button:nth-child(3) {
+        color: #0077b5;
+    }
 
-.additional-action p {
+.lgoin-container .additional-action p {
     margin: auto;
     color: #696969b0;
     font-size: 0.9em;
@@ -156,6 +156,6 @@ button.submit:hover {
     transition: color 0.3s;
 }
 
-.additional-action p:hover {
-    color: #c516d8;
-}
+    .lgoin-container .additional-action p:hover {
+        color: #c516d8;
+    }

@@ -64,6 +64,8 @@ namespace PrgHome.Web.Classes
         {
             if (!string.IsNullOrEmpty(UrlPath))
             {
+                if (UrlPath.IndexOf('?') > 0)
+                    return $"{UrlPath}&index={index}&row={Row}";
                 return $"{UrlPath}?index={index}&row={Row}";
             }
             object routeValues = new

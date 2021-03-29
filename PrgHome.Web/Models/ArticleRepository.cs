@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PrgHome.DataLayer.Models;
@@ -17,7 +16,7 @@ namespace PrgHome.Web.Models
         private readonly IRepositoryBase<Category> _categoryRep;
         private readonly ConvertDate _convert;
 
-        public ArticleRepository(IUnitOfWork uow , ConvertDate convert)
+        public ArticleRepository(IUnitOfWork uow, ConvertDate convert)
         {
             _convert = convert;
             _uow = uow;
@@ -33,16 +32,16 @@ namespace PrgHome.Web.Models
                 categoriesViewModel.Add(new CategoryWithCountViewModel
                 {
                     Id = item.Id,
-                    CategoryTitle=item.Title,
-                    ArticleCount = _articleRep.GetCount(n=>n.CategoryId == item.Id)
-                }) ;
+                    CategoryTitle = item.Title,
+                    ArticleCount = _articleRep.GetCount(n => n.CategoryId == item.Id)
+                });
             }
             return categoriesViewModel;
         }
 
         public async Task<IEnumerable<TopArticleViewModel>> GetTopArticlesAsync()
         {
-            var articles = await _articleRep.FindByConditionAsync(n => n.IsPublish, n => n.OrderBy(n => n.View));
+            var articles = await _articleRep.FindByConditionAsync(n => n.IsPublish, n => n.OrderByDescending(n => n.View));
             articles = articles.Take(5);
             List<TopArticleViewModel> articleViewModels = new List<TopArticleViewModel>();
             foreach (var item in articles)
@@ -53,25 +52,7 @@ namespace PrgHome.Web.Models
                     Title = item.Title,
                     View = item.View,
                     Image = item.Image,
-                    PublishDate = _convert.ConvertMiladiToShamsi(item.PublishDate.Value,"yyyy/MM/dd")
-                });
-            }
-            return articleViewModels;
-        }
-        public async Task<IEnumerable<TopArticleViewModel>> GetLastArticleViewModels()
-        {
-            var articles = await _articleRep.FindByConditionAsync(n => n.IsPublish, n => n.OrderByDescending(n => n.View));
-            articles = articles.Take(4);
-            List<TopArticleViewModel> articleViewModels = new List<TopArticleViewModel>();
-            foreach (var item in articles)
-            {
-                articleViewModels.Add(new TopArticleViewModel
-                {
-                    Description = item.Description,
-                    Title = item.Title,
-                    View = item.View,
-                    Image = item.Image,
-                    PublishDate = _convert.ConvertMiladiToShamsi(item.PublishDate.Value, "yyyy/MM/dd")
+                    PublishDate = _convert.ConvertMiladiToShamsi(item.PublishDate.Value, "yyyy/MM/dd"),
                 });
             }
             return articleViewModels;
@@ -79,9 +60,9 @@ namespace PrgHome.Web.Models
 
         public async Task<IEnumerable<TopArticleViewModel>> GetLastArticlesAsync()
         {
-
             var articles = await _articleRep.FindByConditionAsync(n => n.IsPublish, n => n.OrderByDescending(n => n.PublishDate));
             articles = articles.Take(4);
+            articles = await _articleRep.GetAllReferencePropertyAsync(articles, n => n.Category);
             List<TopArticleViewModel> articleViewModels = new List<TopArticleViewModel>();
             foreach (var item in articles)
             {
@@ -91,7 +72,9 @@ namespace PrgHome.Web.Models
                     Title = item.Title,
                     View = item.View,
                     Image = item.Image,
-                    PublishDate = _convert.ConvertMiladiToShamsi(item.PublishDate.Value, "yyyy/MM/dd")
+                    PublishDate = _convert.ConvertMiladiToShamsi(item.PublishDate.Value, "yyyy/MM/dd"),
+                    TimeToRead = item.TimeToRead.Value,
+                    CategoryTitle = item.Category.Title
                 });
             }
             return articleViewModels;

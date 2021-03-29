@@ -1,0 +1,12 @@
+﻿@if(User.Identity.IsAuthenticated && User.IsInRole("مدیر"))
+{
+    <li>
+        <a href="/admin">ورود به پنل ادمین</a>
+    </li>
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <li>
+        <a href="/account/logout">خروج</a>
+    </li>
+}

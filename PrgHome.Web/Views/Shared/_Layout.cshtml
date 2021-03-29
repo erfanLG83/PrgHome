@@ -65,14 +65,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="articles">آرشیو</a></li>
+                        <li><a href="/articles">آرشیو</a></li>
                         <partial name="_CategoriesNavbarPartail"/>
-                        <li><a href="/aboutus"> درباره ما</a></li>
                         <li><a href="/contactus">تماس با ما</a></li>
+                        <partial name="_UserNavbarPartial"/>
                     </ul>
-                    <form class="navbar-form navbar-left">
+                    <form action="/search" method="get" class="navbar-form navbar-left">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="جستجو کنید">
+                            <input name="q" type="text" class="form-control" placeholder="جستجو کنید">
                         </div>
                         <button type="submit" class="btn btn-default">جستجو</button>
                     </form>

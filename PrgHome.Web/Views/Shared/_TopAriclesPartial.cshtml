@@ -8,7 +8,7 @@
         {
             <div class="might-grid">
                 <div class="grid-might">
-                    <a href="/articles/show/@item.Title"><img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive" alt=""> </a>
+                    <div class="d-flex article-img-container"><img src="@(item.Image==null?"~/images/article.png":"/Files/"+item.Image)" class="img-responsive" alt=""> </div>
                 </div>
                 <div class="might-top">
                     <h4>

@@ -1,10 +1,11 @@
 ﻿@model List<ArticleViewModel>
+@inject ConvertDate convertDate
 @{
     ViewData["Title"] = "مقالات";
 }
 @section Navbar{
     <a href="#" class="active">مقالات</a>
-    <a asp-action="Create">افزودن</a>
+    <a asp-area="Admin" asp-action="Create">افزودن</a>
 }
 
 <section class="margin-20">
@@ -46,7 +47,7 @@
                         </td>
                         <td>@item.CategoryTitle</td>
                         <td>@item.View</td>
-                        <td>@(item.PublishDate.HasValue ? item.PublishDate.Value.ToLongDateString() : "---")</td>
+                        <td>@(item.PublishDate.HasValue ? convertDate.ConvertMiladiToShamsi(item.PublishDate.Value,"yyyy/MM/dd") : "---")</td>
                         <td>
                             <input type="checkbox" @(item.IsPublish ? "checked" : "") disabled />
                         </td>
