@@ -252,7 +252,6 @@ a.create-link {
     top: 85%;
     right: 0;
     width: 200px;
-    height: 150px;
     justify-content: flex-start;
     align-items: center;
     z-index: -1;
@@ -860,15 +859,18 @@ label {
 
 @media only screen and (max-width:720px) {
     .sidebar {
-        width: 30%;
+        width: 50%;
+    }
+    section.navbar-right{
+        visibility:hidden;
     }
 }
 
 
-/*Responsive Styles For Minmize 580px*/
+/*Responsive Styles For Minmize 420px*/
 
-@media only screen and (max-width:580px) {
+@media only screen and (max-width:420px) {
     .sidebar {
-        width: 50%;
+        width: 80%;
     }
 }

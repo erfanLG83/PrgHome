@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -49,12 +50,11 @@ namespace PrgHome.Web
             });
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Account/Login";
-                options.AccessDeniedPath = "/";
+                options.LoginPath = "/account/login";
             });
             services.AddDbContext<PrgHomeContext>(options=>
             {
-                options.UseSqlServer(@"Server=.;Database=PrgHomeDB;trusted_Connection=True");
+                options.UseSqlServer(Configuration.GetConnectionString("PrgHome"));
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IFileWorker, FileWorker>();
@@ -87,8 +87,8 @@ namespace PrgHome.Web
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

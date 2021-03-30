@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +8,6 @@ using PrgHome.Web.Areas.Admin.Models;
 
 namespace PrgHome.Web.Areas.Admin.Controllers
 {
-
     [Authorize(Roles = "مدیر")]
     public class DashboardController : Controller
     {
@@ -41,12 +38,12 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             model.Articles = articles.Select(n => new ArticleViewModel
             {
                 Title = n.Title,
-                CategoryTitle = n.Category==null?null:n.Category.Title,
+                CategoryTitle = n.Category == null ? null : n.Category.Title,
                 Image = n.Image,
-                IsPublish =n.IsPublish,
+                IsPublish = n.IsPublish,
                 PublishDate = n.PublishDate,
-                TimeToRead=n.TimeToRead,
-                View=n.View
+                TimeToRead = n.TimeToRead,
+                View = n.View
             });
             #endregion
             return View(model);

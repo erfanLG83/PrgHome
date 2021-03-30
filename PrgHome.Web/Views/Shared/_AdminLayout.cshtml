@@ -27,23 +27,7 @@
             <section class="navbar-right">
                 @RenderSection("Navbar", true)
             </section>
-            <section class="navbar-left">
-                <section class="profile">
-                    <span>
-                        عرفان لشگری
-                        <i id="profile-toggle" class=" fas fa-caret-down"></i>
-                    </span>
-                    <a href="#">
-                        <img src="~/images/avatar.svg" width="30" alt="">
-                    </a>
-                </section>
-                <section class="animate__animated " id="profile-box">
-                    <a href="#">متن</a>
-                    <a href="#">متن</a>
-                    <a href="#">متن</a>
-                </section>
-            </section>
-
+            <partial name="_ProfileNavbarAdmin" />
         </nav>
         <div class="sidebar animate__animated animate__fadeInRight ">
             <label class="sidebar-close" for="toggle">
@@ -93,7 +77,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="danger" href="#">
+                    <a class="danger" href="/signout">
                         خروج <i class="fas fa-power-off"></i>
                     </a>
                 </li>
@@ -103,7 +87,7 @@
             @RenderBody()
         </main>
         <footer>
-            <p>تمامی حقوق این سایت متعلق به عرفان لشگری است</p>
+            <p>تمامی حقوق این سایت متعلق به خانه برنامه نویسان است</p>
             <p>@(DateTime.Now.Year + " @")</p>
         </footer>
     </div>

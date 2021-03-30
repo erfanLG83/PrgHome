@@ -46,13 +46,17 @@ namespace PrgHome.Web.Controllers
                             return Redirect(userDto.ReturnUrl);
                         return Redirect("/");
                     }
-                    if (result.IsLockedOut)
+                    else if (result.IsLockedOut)
                     {
                         ModelState.AddModelError("", "حساب شما قفل شده است . لطفا بعد چند 5 دقیقه دوباره تلاش کنید");
                     }
-                    if (result.IsNotAllowed)
+                    else if (result.IsNotAllowed)
                     {
                         ModelState.AddModelError("", "شما مجاز به ورود نیستید");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "کلمه عبور اشتباه است");
                     }
                 }
                 else
@@ -61,6 +65,12 @@ namespace PrgHome.Web.Controllers
                 }
             }
             return View(userDto);
+        }
+        [Route("Signout")]
+        public async Task<IActionResult> SignOut()
+        {
+            await _signIn.SignOutAsync();
+            return Redirect("/");
         }
     }
 }

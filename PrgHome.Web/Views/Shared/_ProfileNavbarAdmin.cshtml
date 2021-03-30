@@ -1,0 +1,20 @@
+﻿@inject PrgHome.DataLayer.IdentityServices.IAppUserManager userManager
+@{ 
+    var user = await userManager.FindByIdAsync(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+}
+<section class="navbar-left">
+    <section class="profile">
+        <span>
+            @user.UserName
+            <i id="profile-toggle" class=" fas fa-caret-down"></i>
+        </span>
+        <a href="#">
+            <img src="@(String.IsNullOrEmpty(user.Image)?"~/images/avatar.svg":user.Image)" width="30" alt="">
+        </a>
+    </section>
+    <section class="animate__animated " id="profile-box">
+        <a href="#">حساب کاربری</a>
+        <a href="#">تغییر کلمه عبور</a>
+        <a href="/signout">خروج</a>
+    </section>
+</section>

@@ -32,16 +32,6 @@ namespace PrgHome.DataLayer
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new ArticleMap());
             builder.ApplyConfiguration(new CommentMap());
-            builder.Entity<AppUserRole>()
-                .HasOne(n => n.Role)
-                .WithMany(n => n.UserRoles)
-                .HasForeignKey(n => n.RoleId)
-                .OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<AppUserRole>()
-                .HasOne(n => n.User)
-                .WithMany(n => n.UserRoles)
-                .HasForeignKey(n => n.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Category>()
                 .Property(n => n.Title)
                 .IsRequired()
@@ -72,7 +62,16 @@ namespace PrgHome.DataLayer
                 .Property(b => b.IsActive)
                 .IsRequired()
                 .HasDefaultValue(true);
-
+            builder.Entity<AppUserRole>()
+                .HasOne(n => n.Role)
+                .WithMany(n => n.UserRoles)
+                .HasForeignKey(n => n.RoleId)
+                .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<AppUserRole>()
+                .HasOne(n => n.User)
+                .WithMany(n => n.UserRoles)
+                .HasForeignKey(n => n.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
             #endregion
         }
         public DbSet<Article> Articles { get; set; }
