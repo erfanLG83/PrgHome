@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
     <title>خانه برنامه نویسان @ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,9 +59,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/articles">آرشیو</a></li>
-                        <partial name="_CategoriesNavbarPartail"/>
+                        <partial name="_CategoriesNavbarPartail" />
                         <li><a href="/contactus">تماس با ما</a></li>
-                        <partial name="_UserNavbarPartial"/>
+                        <partial name="_UserNavbarPartial" />
                     </ul>
                     <form action="/search" method="get" class="navbar-form navbar-left">
                         <div class="form-group">
@@ -74,50 +73,54 @@
             </div><!-- /.container-fluid -->
         </nav>
     </div>
-            <!--about-starts-->
-            <div class="about">
-                <div class="container">
-                    <div class="about-main">
-                        <div class="col-md-8 about-right">
-                            @RenderBody()
-                        </div>
-                        <div class="col-md-4 about-left heading">
-                            <partial name="_TopAriclesPartial" />
-                            <partial name="_CategoriesPartial" />
-                            @if (ViewData["last_articles"] == null || (bool)ViewData["last_articles"]==true)
-                            {
-                                <partial name="_LastArticlesPartial" />
-                            }
-                            <div class="abt-2">
-                                <h3>
-                                    خبر نامه
-                                </h3>
-                                <div class="news">
-                                    <form>
-                                        <input type="text" value="ایمیل" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ایمیل';}" />
-                                        <input type="submit" value="مشترک شدن">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
+    <!--about-starts-->
+    <div class="about">
+        <div class="container">
+            <div class="about-main">
+                <div class="col-md-8 about-right">
+                    @RenderBody()
                 </div>
-            </div>
-            <!--about-end-->
-            <!--footer-starts-->
-            <div class="footer">
-                <div class="container">
-                    <div class="footer-text">
-                        <p>
-                            کليه حقوق و محتوای اين سایت متعلق به خانه برنامه نویسان می باشد و هر گونه کپی برداری از محتوا غیر مجاز و بدون رضایت ماست
-                        </p>
-                    </div>
+                <div class="col-md-4 about-left heading">
+                    <partial name="_TopAriclesPartial" />
+                    <partial name="_CategoriesPartial" />
+                    @if (ViewData["last_articles"] == null || (bool)ViewData["last_articles"] == true)
+                    {
+                        <partial name="_LastArticlesPartial" />
+                    }
+                    <partial name="_NewslettersPartial" />
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <!--footer-end-->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    @await RenderSectionAsync("Scripts",false)
+        </div>
+    </div>
+    <!--about-end-->
+    <!--footer-starts-->
+    <div class="footer">
+        <div class="container">
+            <div class="footer-text">
+                <p>
+                    کليه حقوق و محتوای اين سایت متعلق به خانه برنامه نویسان می باشد و هر گونه کپی برداری از محتوا غیر مجاز و بدون رضایت ماست
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--footer-end-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    @await RenderSectionAsync("Scripts", false)
+
+    <script>
+        const joinNewsLetters = () => {
+            const email = document.querySelector("#newsletters_email").value;
+            if (email === '' || email === ' ')
+                return;
+            fetch('/JoinNewsLetters?email=' + email)
+                .then(r => r.json())
+                .then(d => {
+                    if (d.success === true)
+                        document.getElementById('newsletters_container').remove();
+                }).catch(err => console.log(err));
+        }
+    </script>
 </body>
 
 </html>

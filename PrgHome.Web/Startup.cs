@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -63,6 +64,7 @@ namespace PrgHome.Web
             services.AddScoped<IAppRoleManager, AppRoleManager>();
             services.AddScoped<IAppUserManager,AppUserManager>();
             services.AddScoped<ConvertDate>();
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddSingleton<HtmlEncoder>(
                 HtmlEncoder.Create(allowedRanges: new[] {
                     UnicodeRanges.BasicLatin,

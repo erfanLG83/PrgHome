@@ -1,0 +1,15 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@if (!HttpContextAccessor.HttpContext.Request.Cookies.Any(n => n.Key == "NewsLetterEmail"))
+{
+    <div id="newsletters_container" class="abt-2">
+        <h3>
+            خبر نامه
+        </h3>
+        <div class="news">
+            <form onsubmit="return false">
+                <input type="email" id="newsletters_email" required value="ایمیل" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'ایمیل';}" />
+                <input type="submit" onclick="joinNewsLetters()" value="مشترک شدن">
+            </form>
+        </div>
+    </div>
+}

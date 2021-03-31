@@ -32,6 +32,12 @@ namespace PrgHome.DataLayer
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new ArticleMap());
             builder.ApplyConfiguration(new CommentMap());
+            builder.Entity<CommonNewsLetters>()
+                .ToTable("CommonsNewsLetters")
+                .HasKey(n => n.Email);
+            builder.Entity<CommonNewsLetters>()
+                .Property(n => n.Email)
+                .HasMaxLength(350);
             builder.Entity<Category>()
                 .Property(n => n.Title)
                 .IsRequired()
@@ -78,6 +84,6 @@ namespace PrgHome.DataLayer
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<File> Files { get; set; }
-
+        public DbSet<CommonNewsLetters> CommonNewsLetters { get; set; }
     }
 }

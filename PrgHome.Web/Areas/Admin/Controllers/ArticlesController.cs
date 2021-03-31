@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PrgHome.DataLayer.Models;
@@ -20,11 +21,13 @@ namespace PrgHome.Web.Areas.Admin.Controllers
         IUnitOfWork _unitOfWork;
         IRepositoryBase<Article> _articleRep;
         IFileWorker _fileWorker;
-        public ArticlesController(IUnitOfWork unitOfWork, IFileWorker fileWorker)
+        private readonly IEmailSender _emailSender;
+        public ArticlesController(IUnitOfWork unitOfWork, IFileWorker fileWorker , IEmailSender emailSender)
         {
             _fileWorker = fileWorker;
             _unitOfWork = unitOfWork;
             _articleRep = _unitOfWork.GetRepository<Article>();
+            _emailSender = emailSender;
         }
         public async Task<IActionResult> Index(int index = 1, int row = 5)
         {
@@ -95,6 +98,7 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             if (article.IsPublish)
             {
                 createArticle.PublishDate = DateTime.Now;
+                await SendArticleNewEmail(article);
             }
             await _articleRep.CreateAsync(createArticle);
             await _unitOfWork.Commit();
@@ -206,6 +210,25 @@ namespace PrgHome.Web.Areas.Admin.Controllers
             await _unitOfWork.Commit();
             Popup.PopupModel = new Popup("حذف مقاله", $"حذف مقاله با عنوان {article.Title} با موفقیت انجام شد", IconType.Success);
             return Redirect("/admin/articles");
+        }
+        private async Task SendArticleNewEmail(ArticleDto article)
+        {
+            var allCommons = _unitOfWork._context.CommonNewsLetters.ToList();
+            string emailText = $@"<div style='direction:rtl'>
+                                           <h3>سلام , مقاله جدید در سایت خانه برنامه نویسان انتشار یافته با عنوان <b>{article.Title}</b></h3>
+                                           <p>{article.Description}</p>
+                                            <p>جهت مطالعه <a style='color:#00e' href='{HttpContext.Request.Scheme}://{HttpContext.Request.Host+HttpContext.Request.PathBase}/articles/show/{article.Title}'>کلیک کنید.</a></p>
+                                        </div>";
+            try
+            {
+                foreach (var item in allCommons)
+                {
+                    await _emailSender.SendEmailAsync(item.Email, "مقاله جدید در خانه برنامه نویسان", emailText);
+                }
+            }
+            catch (Exception exp)
+            {
+            }
         }
     }
 }
