@@ -1,3 +1,6 @@
+textarea{
+    max-width:100%;
+}
 .icon-style1 {
     color: rgb(18, 168, 228);
     font-size: 25px;
@@ -158,7 +161,9 @@ p.tags > a {
     color: #f00;
 }
 .validation-summary-errors li{
-    font-size:14px
+    font-size:14px;
+    display:block !important;
+    list-style:disc !important;
 }
 @media only screen and (max-width: 992px) {
     .about-tre> .panel {

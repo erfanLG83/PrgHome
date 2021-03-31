@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrgHome.DataLayer;
 
 namespace PrgHome.DataLayer.Migrations
 {
     [DbContext(typeof(PrgHomeContext))]
-    partial class PrgHomeContextModelSnapshot : ModelSnapshot
+    [Migration("20210330093255_Add_DateProperty_CommentTB")]
+    partial class Add_DateProperty_CommentTB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -433,7 +435,7 @@ namespace PrgHome.DataLayer.Migrations
                     b.HasOne("PrgHome.DataLayer.Models.Comment", "ParentComment")
                         .WithMany("ChildrenComments")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Article");
 

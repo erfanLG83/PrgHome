@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PrgHome.DataLayer.IdentityClasses;
@@ -14,7 +11,7 @@ namespace PrgHome.Web.Controllers
     {
         private readonly SignInManager<AppUser> _signIn;
         private readonly IAppUserManager _userManager;
-        public AccountController(SignInManager<AppUser> signIn , IAppUserManager userManager)
+        public AccountController(SignInManager<AppUser> signIn, IAppUserManager userManager)
         {
             _userManager = userManager;
             _signIn = signIn;
@@ -24,7 +21,7 @@ namespace PrgHome.Web.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl)
         {
-            return View(new LoginUserDto {ReturnUrl =returnUrl });
+            return View(new LoginUserDto { ReturnUrl = returnUrl });
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -33,11 +30,11 @@ namespace PrgHome.Web.Controllers
             if (ModelState.IsValid)
             {
                 AppUser user = await _userManager.FindByNameAsync(userDto.UserName);
-                if (user==null)
+                if (user == null)
                 {
                     user = await _userManager.FindByEmailAsync(userDto.UserName);
                 }
-                if (user!=null)
+                if (user != null)
                 {
                     var result = await _signIn.PasswordSignInAsync(user, userDto.Password, true, user.LockoutEnabled);
                     if (result.Succeeded)

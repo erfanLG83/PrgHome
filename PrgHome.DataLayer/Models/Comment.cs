@@ -10,6 +10,7 @@ namespace PrgHome.DataLayer.Models
         public string Email { get; set; }
         public string Name { get; set; }
         public string Text { get; set; }
+        public DateTime Date { get; set; }
         //Navigation Properties
         public int? ParentId { get; set; }
         public int ArticleId { get; set; }

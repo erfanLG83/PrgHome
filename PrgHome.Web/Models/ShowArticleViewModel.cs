@@ -41,6 +41,7 @@ namespace PrgHome.Web.Models
         public string CategoryTitle { get; set; }
         public int View { get; set; }
         public int TimeToRead { get; set; }
+        public List<CommentViewModel> Comments { get; set; }
         public List<string> Tags { get; set; }
     }
 }

@@ -12,6 +12,8 @@ namespace PrgHome.DataLayer.Mapping
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.ToTable("Comments").HasKey(n => n.Id);
+            builder.Property(n => n.Date)
+                .IsRequired();
             builder.Property(n => n.Name)
                 .IsRequired()
                 .HasMaxLength(125);
